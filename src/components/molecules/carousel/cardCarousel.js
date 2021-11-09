@@ -13,7 +13,8 @@ import EuroIcon from '@mui/icons-material/Euro';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import SvgIcon from '@mui/material/SvgIcon';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import MobileCardCarousel from "../atoms/mobileCardCarousel";
+import MobileCardCarousel from "../../atoms/carouselComponents/mobileCardCarousel";
+import ChartCarouselCard from "../../atoms/carouselComponents/chartCarouselCard";
 
 const mobile = MobileCardCarousel;
 
@@ -36,9 +37,8 @@ const ArrayContent = [
   }
 ]
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard(props) {
 const theme = createTheme();
-
 
 
 
@@ -60,7 +60,7 @@ const theme = createTheme();
             >
               {
                 ArrayContent.map((contentObject, index) =>(
-                  <Grid item xs={12} key={index}>
+                  <Grid item xs={12} key={props.slideIndex + "_" + index}>
                     <Grid container
                         direction="row"
                         justifyContent="flex-start"
@@ -89,15 +89,19 @@ const theme = createTheme();
           <Grid item xs={6}>
           <Box
           sx={{
-            width: 190,
-            height: 100,
-            backgroundColor: 'primary.dark',
+            width: "100%",
+            height: "100%",
+            maxHeight: 100,
             '&:hover': {
               backgroundColor: 'primary.main',
               opacity: [0.9, 0.8, 0.7],
             },
           }}
+        >
+        <ChartCarouselCard
+          slideIndex={props.slideIndex}
         />
+        </Box>
           </Grid>
         </Grid>
         </Box>

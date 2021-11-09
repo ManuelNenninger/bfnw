@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { PrevButton, NextButton } from "../atoms/emblaCarouselButtons";
+import { PrevButton, NextButton } from "../../atoms/carouselComponents/emblaCarouselButtons";
 import useEmblaCarousel from "embla-carousel-react";
 import CarouselCard from "./cardCarousel";
 
@@ -29,10 +29,12 @@ const EmblaCarousel = ({ slides }) => {
     <div className="embla">
       <div className="embla__viewport" ref={viewportRef}>
         <div className="embla__container">
-          {slides.map((index) => (
-            <div className="embla__slide" key={index}>
+          {slides.map((slide, index) => (
+            <div className="embla__slide" key={"embla__slide_index_" + index}>
               <div className="embla__slide__inner">
-                <CarouselCard/>
+                <CarouselCard
+                  slideIndex={index}
+                />
               </div>
             </div>
           ))}

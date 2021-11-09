@@ -18,7 +18,9 @@ import ShowChartIcon from '@mui/icons-material/ShowChart';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Appbar from './appbar';
-import EmblaCarousel from "../molecules/emblaCarousel";
+import EmblaCarousel from "../molecules/carousel/emblaCarousel";
+import TestChart from "../atoms/mainDashboardChart/chartMain";
+import PerformanceDashboard from "../molecules/performanceDashboard";
 
 const drawerWidth = 240;
 const SLIDE_COUNT = 5;
@@ -27,6 +29,7 @@ const slides = Array.from(Array(SLIDE_COUNT).keys());
 function ResponsiveDrawer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -121,6 +124,7 @@ function ResponsiveDrawer(props) {
       <Box component="main" sx={{ flexGrow: 1, p: 3, width: { xs: '100%', md: `calc(100% - ${drawerWidth}px)` },  }}>
         <Toolbar />
         <EmblaCarousel slides={slides}/>
+        <PerformanceDashboard />
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
           tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
