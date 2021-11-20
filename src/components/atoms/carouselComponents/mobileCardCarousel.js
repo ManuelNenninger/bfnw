@@ -74,7 +74,7 @@ export default function MobileCardCarousel(props) {
           </Typography>
         </Grid>
       </Grid>
-      )
+      ) 
       }
     </Grid>
     ))

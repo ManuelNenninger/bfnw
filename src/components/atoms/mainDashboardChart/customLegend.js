@@ -21,7 +21,12 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 
-export default function BoxSx() {
+export default function BoxSx(props) {
+
+  function setWeekdaySelection(event) {
+      props.setWeekdaySelection(event.target.value);
+    }
+
   return (
     <Box
       sx={{
@@ -67,7 +72,7 @@ export default function BoxSx() {
             >
               <Grid item>
                 <Typography
-                  variant="h4"
+                  variant="h5"
                   gutterBottom
                   component="div"
                   id="legend_price"
@@ -81,7 +86,7 @@ export default function BoxSx() {
             </Grid>
           </Grid>
           <Grid item>
-            <Box sx={{ p: 1, borderRadius: 5, border: 1, borderColor: "#ffffff", mindWidth: "1rem" }} id="relative_returne_Box">
+            <Box sx={{pr: 1, pl: 1, borderRadius: 3, border: 1, borderColor: "#ffffff", mindWidth: "1rem" }} id="relative_returne_Box">
               <Grid
                 container
                 direction="row"
@@ -112,10 +117,18 @@ export default function BoxSx() {
           aria-label="text button group"
           color="secondary"
         >
-          <ColorButton>Intraday</ColorButton>
-          <ColorButton>Week</ColorButton>
-          <ColorButton>Month</ColorButton>
-          <ColorButton>Max</ColorButton>
+        <ColorButton value="intraday" onClick={setWeekdaySelection}>
+          Intraday
+        </ColorButton>
+        <ColorButton value="week" onClick={setWeekdaySelection}>
+          Week
+        </ColorButton>
+        <ColorButton value="month" onClick={setWeekdaySelection}>
+          Month
+        </ColorButton>
+        <ColorButton value="max" onClick={setWeekdaySelection}>
+          Max
+        </ColorButton>
         </ButtonGroup>
       </Box>
     </Box>

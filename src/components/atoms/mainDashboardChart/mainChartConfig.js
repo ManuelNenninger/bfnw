@@ -3,7 +3,18 @@ import Chart from "chart.js/auto";
 import RelativeReturnCalc from "../../calc/relativeReturne";
 
 
-export default function mainChartConfig(dataValueArray, dataKeyArray, metaData) {
+export default function mainChartConfig(dataValueArray, dataKeyArray, metaData, weekdaySelection) {
+
+  //Configuration für Labels auf der X-Achse. Abhaenig von weekdaySelection
+  //https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
+  const apiParametersSelection = {
+    "intraday": { hour: '2-digit'},
+    "week": { day: 'numeric', weekday: 'short',},
+    "month": { month: 'short', day: 'numeric',},
+    "max": { year: 'numeric', month: 'short',},
+  };
+
+
   //Dotted Line
   const horizontalDottedLine = {
     id: "horizontalDottedLine",
@@ -62,7 +73,7 @@ const costumeLegend = {
       const relativeReturnLabel = document.getElementById("relative_returne");
 
       //Initiales zuweisen des Costume Legend
-      legendLabel.innerHTML = metaData["2. Symbol"];
+      legendLabel.innerHTML = metaData;
       relativeReturnLabel.innerHTML = RelativeReturnCalc(dataValueArray.at(0),dataValueArray.at(-1));
 
       //Setze fest, ob der initial chart green or red ist
@@ -143,7 +154,9 @@ const costumeLegend = {
         scales: {
           x: {
             grid: {
-              display: !true
+              display: !true,
+              borderWidth: 2,
+              borderColor: "#292727"
             },
             x: {
               grid: {
@@ -162,12 +175,15 @@ const costumeLegend = {
                 //Bekomm den Wert des ticks via Scope & this
                 //Mach daraus ein Datum, wovon DU wiederum die Uhrzeit bekommst
                 const dateObjectOfTick = new Date(this.getLabelForValue(value));
-                return dateObjectOfTick.getHours();
+                return new Date(this.getLabelForValue(value)).toLocaleDateString("de-DE", apiParametersSelection[weekdaySelection]);
               }
             }
           },
           y: {
-            grid: {}
+            grid: {
+              borderWidth: 2,
+              borderColor: "#292727",
+            }
           }
         },
       }

@@ -43,7 +43,7 @@ const theme = createTheme();
 
 
   return (
-    <Box sx={{ width: "100%", height: '100%',  borderRight: {xs: 0, md: 1}, borderColor: 'grey.500'   }}>
+    <Box sx={{ width: "100%", height: '100%', border: {xs: 0, md: 1},borderRadius: 5, borderColor: {md: 'borderColor.main'},}}>
       <Box sx={{padding: theme.spacing(1, 2), borderRadius: {xs: 10, md: "none"}, border: {xs: 1, md: "none"}, display: {xs: "inline-block", md: "block"} }}>
         {/* Render bei größer Medium Size die full Cards des Carousels */}
       <Box sx={{ display: { xs: 'none', md: 'block' } }}>
@@ -92,10 +92,6 @@ const theme = createTheme();
             width: "100%",
             height: "100%",
             maxHeight: 100,
-            '&:hover': {
-              backgroundColor: 'primary.main',
-              opacity: [0.9, 0.8, 0.7],
-            },
           }}
         >
         <ChartCarouselCard

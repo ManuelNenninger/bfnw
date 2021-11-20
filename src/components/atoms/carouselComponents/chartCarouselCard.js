@@ -2,76 +2,54 @@ import * as React from 'react';
 import { useEffect, useRef } from "react";
 import Box from '@mui/material/Box';
 import Chart from "chart.js/auto";
+import dataRequestCardChart from "../mainDashboardChart/dataRequestMainChart";
+import cardChartConfigFunction from "./cardChartConfig";
 
 
 export default function BoxSx(props) {
+  let myChart;
+  //Die ID des Canvas beginnt wie in den Tutorials mit MyChart.
+  //Da jedes Canvas eine eigene Id benoetigt, wird hier MyChart mit der Index-Nr der Slide ergaenzt.
+  const chartId = "mychart" + props.slideIndex;
 
-//Die ID des Canvas beginnt wie in den Tutorials mit MyChart.
-//Da jedes Canvas eine eigene Id benoetigt, wird hier MyChart mit der Index-Nr der Slide ergaenzt.
-const chartId = "mychart" + props.slideIndex;
 
-  const data = {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'Apple'],
-      datasets: [{
-          label: '',
-          data: [12, 19, 3, 5, 2, 3, 4],
-          borderColor: "#3e95cd",
-          fill: false,
-          borderWidth: 2,
-          borderJoinStyle: "round",
-          tension: 0.1,
-          pointRadius: 0,
-      }]
-  }
-
-//Option fuer eine reine Line-Chart.
-  const options = {
-    //https://www.chartjs.org/docs/latest/configuration/responsive.html
-      maintainAspectRatio: !true,
-      scales: {
-          y: {
-              beginAtZero: true,
-                grid:{
-                  drawBorder: false,
-                  color: "#FFFFFF",
-                },
-                ticks: {
-                  display: false,
-                }
-          },
-          x: {
-              grid:{
-                drawBorder: false,
-                color: "#FFFFFF",
-              },
-              ticks: {
-                display: false,
-              },
-          },
-
-      },
-      plugins: {
-        legend: false
-      }
-  }
+  //<-------- ChartJs Funktion, um den Chart zu erstellen -------->
+  const InitialChartJsFunctionforCard = async (event) => {
+    //Hie wird die Data angefordert. Da auf die Daten gewartet werden muss, ist hier eine await funktion.
+    const { dataValueArray, dataKeyArray, metaData } = await dataRequestCardChart();
+    //Hie wird die Config des Charts angefordert. Übergeben wird dabei die Werte der Response
+    let { chartConfig } = cardChartConfigFunction(
+      dataValueArray,
+      dataKeyArray,
+      metaData
+    );
+    const ctx = document.getElementById(chartId);
+    myChart = new Chart(ctx, chartConfig, []);
+    // console.log(
+    //   "Hier ist der aktuell erstellte chart, da die Response da ist: " + myChart
+    // );
+  };
 
   useEffect(() => {
-    const ctx = document.getElementById(chartId);
-
-    const myChart = new Chart(ctx, {
-      type: 'line',
-      data: data,
-      options: options,
-  }, []);
-
-    return function cleanup() {
-      myChart.destroy();
-    };
-  });
+  InitialChartJsFunctionforCard();
+  // console.log("Jetzt wird ein neuer Chart gemacht! für " + chartId);
+  // console.log(
+  //   "hier ist der Chart undefiniert, da auf die response gewartet wird:" +
+  //     myChart
+  // );
+  return () => {
+    // console.log("Hier wird der aktuelle chart mit id " + chartId +  " zerstört: " + myChart);
+    myChart.destroy();
+  };
+}, []);
 
   return (
     <>
-      <canvas id={chartId} width="100%" height="100%" aria-label="Chart-for-carousel-Card" role="img"></canvas>
+      <canvas id={chartId}
+      width="100%"
+      height="100%"
+      aria-label="Hello ARIA World"
+      role="img"></canvas>
     </>
   );
 }

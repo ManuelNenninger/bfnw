@@ -1,23 +1,25 @@
 import * as React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
 import Chart from "chart.js/auto";
 import dataRequestMainChart from "./dataRequestMainChart";
 import chartConfigFunction from "./mainChartConfig";
+import DataRequestPolygonIo from "./dataRequestPolygonIo";
 
-export default function BoxSx() {
+export default function BoxSx(props) {
   let myChart;
 
   //<-------- ChartJs Funktion, um den Chart zu erstellen -------->
   const InitialChartJsFunction = async (event) => {
     //Hie wird die Data angefordert. Da auf die Daten gewartet werden muss, ist hier eine await funktion.
-    const { dataValueArray, dataKeyArray, metaData } = await dataRequestMainChart();
+    const { dataValueArray, dataKeyArray, metaData } = await DataRequestPolygonIo(props.weekdaySelection);
 
     //Hie wird die Config des Charts angefordert. Übergeben wird dabei die Werte der Response
     let { chartConfig } = chartConfigFunction(
       dataValueArray,
       dataKeyArray,
-      metaData
+      metaData,
+      props.weekdaySelection
     );
 
     const ctx = document.getElementById("myChart");
@@ -42,15 +44,14 @@ export default function BoxSx() {
       // console.log("Hier wird der aktuelle chart zerstört: " + myChart);
       myChart.destroy();
     };
-  });
+  }, [props.weekdaySelection]);
 
   return (
     <Box
       variant="Main-Chart"
       sx={{
         width: "100%",
-        height: 500,
-        border: 1
+        height: 400,
       }}
     >
       <canvas

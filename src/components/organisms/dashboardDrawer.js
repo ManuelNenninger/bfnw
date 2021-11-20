@@ -23,7 +23,7 @@ import TestChart from "../atoms/mainDashboardChart/chartMain";
 import PerformanceDashboard from "../molecules/performanceDashboard";
 
 const drawerWidth = 240;
-const SLIDE_COUNT = 5;
+const SLIDE_COUNT = 2;
 const slides = Array.from(Array(SLIDE_COUNT).keys());
 
 function ResponsiveDrawer(props) {
