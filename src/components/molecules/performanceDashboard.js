@@ -6,14 +6,13 @@ import MainChart from "../atoms/mainDashboardChart/chartMain";
 import CostumeLegend from "../atoms/mainDashboardChart/customLegend";
 import PerformanceTable from "./PerformanceTable";
 
-export default function BoxSx() {
-  const [weekdaySelection, setWeekdaySelection] = useState("intraday");
+export default function BoxSx(props) {
+  const [weekdaySelection, setWeekdaySelection] = useState("week");
 
 
   return (
     <Box sx={{
         width: "100%",
-        height: "100%",
         paddingTop: 2,
       }}>
         <Grid container spacing={3}>
@@ -23,7 +22,7 @@ export default function BoxSx() {
                     height: "100%",
                   }} >
                   <CostumeLegend setWeekdaySelection={setWeekdaySelection}/>
-                  <MainChart weekdaySelection={weekdaySelection} />
+                  <MainChart weekdaySelection={weekdaySelection} searchContent={props.searchContent}/>
             </Box>
           </Grid>
           <Grid item xs={4}>

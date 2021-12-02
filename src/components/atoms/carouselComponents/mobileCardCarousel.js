@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useRef } from "react";
 import {
   styled,
   createTheme
@@ -13,6 +14,10 @@ import EuroIcon from '@mui/icons-material/Euro';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import SvgIcon from '@mui/material/SvgIcon';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import DataRequestPolygonIo from "../mainDashboardChart/dataRequestPolygonIo";
+import RelativeReturnCalc from "../../calc/relativeReturne";
+import theme from '../../../../styles/theme';
+
 
 
 
@@ -35,47 +40,66 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 
 export default function MobileCardCarousel(props) {
-  const theme = createTheme();
 
 
+  const carouselCardTickerSelection = {
+    "0": "OTLY",
+    "1": "GME",
+    "2": "TSLA",
+    "3": "AAPL",
+    "4": "SA",
+  };
 
+  //<-------- ChartJs Funktion, um den Chart zu erstellen -------->
+  const InitialChartJsFunctionforCard = async (event) => {
+    //Hie wird die Data angefordert. Da auf die Daten gewartet werden muss, ist hier eine await funktion.
+    const { dataValueArray, dataKeyArray, metaData } = await DataRequestPolygonIo({weekdaySelection: "week", searchContent: carouselCardTickerSelection[props.slideIndex]});
+    //Hier werden die Daten in die HTML Elemente injeziert
+    document.getElementById("Mobile_Typography_SlideIndex_" + props.slideIndex + "_RowIndex_0").innerHTML = metaData;
+    document.getElementById("Mobile_Typography_SlideIndex_" + props.slideIndex + "_RowIndex_1").innerHTML = RelativeReturnCalc(dataValueArray.at(0),dataValueArray.at(-1)) + "%";
+    document.getElementById("Mobile_Typography_SlideIndex_" + props.slideIndex + "_RowIndex_2").innerHTML = dataValueArray.at(-1);
+    if (dataValueArray[0] >= dataValueArray.at(-1)) {
+      document.getElementById("Mobile_Relative_Return_ArrowDropUpIcon_SlideIndex_" +  props.slideIndex).style.display = "none";
+      document.getElementById("Mobile_Typography_SlideIndex_" + props.slideIndex + "_RowIndex_1").style.color = theme.palette.error.main;
+    } else {
+      document.getElementById("Mobile_Relative_Return_ArrowDropDownIcon_SlideIndex_" +  props.slideIndex).style.display = "none";
+      document.getElementById("Mobile_Typography_SlideIndex_" + props.slideIndex + "_RowIndex_1").style.color = theme.palette.primary.main;
+    }
+  };
+
+  useEffect(() => {
+  InitialChartJsFunctionforCard();
+}, []);
 
   return (
     <div>
-  <Grid container direction="column" alignItems="flex-start" sx={{marginRight: {xs: theme.spacing(10), md: "none"}}}>
-
+      <Grid container direction="column" alignItems="flex-start" sx={{marginRight: {xs: theme.spacing(4), md: "none"}}}>
     {
     props.ArrayContent.map((contentObject, index) =>(
-    <Grid item xs={12} key={index}>
-      {
-      index === 0 ? (
-      <>
-        <Grid item xs={12} key={index}>
-          <Grid item border>
-            <SvgIcon component={contentObject.icon} sx={{fontSize: 50, color: contentObject.icon === ArrowDropUpIcon ? ("#4caf50") : (contentObject.icon === ArrowDropDownIcon ? ("#4caf50") : (theme.palette.text.primary))}} />
-          </Grid>
+    <Grid item xs={12} key={props.slideIndex + "_" + index}>
+      <Grid container
+          direction="row"
+          justifyContent="flex-start"
+          alignItems="center"
+          >
+        <Grid item >
+          {index === 1 ? (<>
+            <SvgIcon id={"Mobile_Relative_Return_ArrowDropUpIcon_SlideIndex_" +  props.slideIndex} sx={{color: theme.palette.primary.main}} component={ArrowDropUpIcon} /> <SvgIcon id={"Mobile_Relative_Return_ArrowDropDownIcon_SlideIndex_" +  props.slideIndex} sx={{color: theme.palette.error.main}} component={ArrowDropDownIcon} />
+            </>)
+            :
+            <SvgIcon component={contentObject.icon} /> }
         </Grid>
-        <Grid item xs={12} key={index}>
-          <Typography sx={{ marginTop: theme.spacing(2), color: contentObject.icon === ArrowDropUpIcon ? ("#4caf50") : (contentObject.icon === ArrowDropDownIcon ? ("#4caf50") : (theme.palette.text.primary))}} variant={contentObject.typographyVariant}
-            component="div">
-            {contentObject.content}
-          </Typography>
-        </Grid>
-      </>
-      ) : (
-      <Grid container direction="row" justifyContent="flex-start" alignItems="center">
-        <Grid item>
-          <SvgIcon fontSize="small" component={contentObject.icon} sx={{ color: contentObject.icon === ArrowDropUpIcon ? ("#4caf50") : (contentObject.icon === ArrowDropDownIcon ? ("#4caf50") : (theme.palette.text.primary))}} />
-        </Grid>
-        <Grid item>
-          <Typography sx={{marginLeft: theme.spacing(1), color: contentObject.icon === ArrowDropUpIcon ? ("#4caf50") : (contentObject.icon === ArrowDropDownIcon ? ("#4caf50") : (theme.palette.text.primary))}} variant={contentObject.typographyVariant}
-            component="div">
-            {contentObject.content}
+        <Grid item >
+          <Typography
+            sx={{marginLeft: theme.spacing(1)}}
+            variant={contentObject.typographyVariantmobile}
+            component="div"
+            id={"Mobile_Typography_SlideIndex_" + props.slideIndex + "_RowIndex_"+ index}
+          >
+              loading...
           </Typography>
         </Grid>
       </Grid>
-      ) 
-      }
     </Grid>
     ))
     }

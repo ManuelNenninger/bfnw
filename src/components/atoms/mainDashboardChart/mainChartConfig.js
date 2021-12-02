@@ -1,10 +1,12 @@
 import * as React from "react";
 import Chart from "chart.js/auto";
 import RelativeReturnCalc from "../../calc/relativeReturne";
+import theme from '../../../../styles/theme';
+
+
 
 
 export default function mainChartConfig(dataValueArray, dataKeyArray, metaData, weekdaySelection) {
-
   //Configuration für Labels auf der X-Achse. Abhaenig von weekdaySelection
   //https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
   const apiParametersSelection = {
@@ -14,8 +16,21 @@ export default function mainChartConfig(dataValueArray, dataKeyArray, metaData, 
     "max": { year: 'numeric', month: 'short',},
   };
 
+  //<-------------- The linear Gradient initialisierung -------------->
+  let canvas = document.getElementById("myChart");
+  let ctx = canvas.getContext("2d");
+  let gradient_positiveReturn = ctx.createLinearGradient(0, 0, 0, 400);
+  gradient_positiveReturn.addColorStop(0, "rgba(107, 178, 151, 0.9)");
+  gradient_positiveReturn.addColorStop(0.5, "rgba(107, 178, 151, 0.5)");
+  gradient_positiveReturn.addColorStop(0.8, "rgba(107, 178, 151, 0.3)");
+  gradient_positiveReturn.addColorStop(1, "rgba(107, 178, 151, 0)");
+  let gradient_negativeReturn = ctx.createLinearGradient(0, 0, 0, 400);
+  gradient_negativeReturn.addColorStop(0, "rgba(201, 24, 74, 0.6)");
+  gradient_negativeReturn.addColorStop(0.5, "rgba(201, 24, 74, 0.4)");
+  gradient_negativeReturn.addColorStop(0.8, "rgba(201, 24, 74, 0.3)");
+  gradient_negativeReturn.addColorStop(1, "rgba(201, 24, 74, 0)");
 
-  //Dotted Line
+  //<-------------- Plugin fuer die horizontal Dotted Line -------------->
   const horizontalDottedLine = {
     id: "horizontalDottedLine",
     beforeDatasetsDraw(chart, args, options) {
@@ -27,7 +42,7 @@ export default function mainChartConfig(dataValueArray, dataKeyArray, metaData, 
       ctx.save();
 
       //draw line
-      ctx.strokeStyle = "#292727";
+      ctx.strokeStyle = theme.palette.borderColor.main;
       //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash
       ctx.setLineDash([10, 20]);
       ctx.strokeRect(left, y.getPixelForValue(dataValueArray[0]), width, 0);
@@ -37,7 +52,7 @@ export default function mainChartConfig(dataValueArray, dataKeyArray, metaData, 
   //Unkommentiere das, falls fuer alle Charts gueltig
   //Chart.register(horizontalDottedLine);
 
-  //PlugIn fuer die verticale Linie (cursor)
+  //<-------------- PlugIn fuer die verticale Linie (cursor) -------------- >
   const tooltipline = {
   id: "tooltipline",
   beforeDraw: (chart) => {
@@ -55,7 +70,7 @@ export default function mainChartConfig(dataValueArray, dataKeyArray, metaData, 
       //...und zeichne die Linie vom x-Wert des ausgewählten Points bis zum Bottom Y-Wert des Charts
       ctx.lineTo(activePoint.element.x, chart.chartArea.bottom);
       ctx.lineWidth = 1;
-      ctx.strokeStyle = "#AAAAAA";
+      ctx.strokeStyle = theme.palette.secondary.main;
       //Zeichne die Stroke
       ctx.stroke();
       //Zerstöre Sie danach, um neue Linien zu malen
@@ -64,42 +79,44 @@ export default function mainChartConfig(dataValueArray, dataKeyArray, metaData, 
   }
 };
 
-//PlugIn fuer den custom Legend. Hier werden die ausgewählten Datenpoints in das hTML Legend uebertragen.
+//<-------------- PlugIn fuer den custom Legend. Hier werden die ausgewählten Datenpoints in das hTML Legend uebertragen -------------->
 const costumeLegend = {
     id: "costumeLegend",
     beforeDraw: (chart) => {
       const priceLabel = document.getElementById("legend_price");
       const legendLabel = document.getElementById("legend_label");
       const relativeReturnLabel = document.getElementById("relative_returne");
-
       //Initiales zuweisen des Costume Legend
       legendLabel.innerHTML = metaData;
       relativeReturnLabel.innerHTML = RelativeReturnCalc(dataValueArray.at(0),dataValueArray.at(-1));
 
       //Setze fest, ob der initial chart green or red ist
       if (dataValueArray[0] >= dataValueArray.at(-1)) {
-        chart.data.datasets[0].borderColor = "#B00020";
+        chart.data.datasets[0].borderColor = theme.palette.error.main;
+        chart.data.datasets[0].backgroundColor = gradient_negativeReturn;
         chart.update();
-        document.getElementById("relative_returne_Box").style.backgroundColor = "#B00020";
+        document.getElementById("relative_returne_Box").style.backgroundColor = theme.palette.error.main;
       } else {
-        chart.data.datasets[0].borderColor = "#4DA889";
+        chart.data.datasets[0].borderColor = theme.palette.primary.dark;
+        chart.data.datasets[0].backgroundColor = gradient_positiveReturn;
         chart.update();
-        document.getElementById("relative_returne_Box").style.backgroundColor = "#4DA889";
+        document.getElementById("relative_returne_Box").style.backgroundColor = theme.palette.primary.dark;
       }
 
       //Wenn Du über einen Datenpoint bist oder dieser aktiv wird das -active array gesetzt, und die Hoover Daten gespeichert.
       if (chart.tooltip._active && chart.tooltip._active.length) {
-
         //Wenn der derzeit aktive Datenpoint kleiner als der Anfangswert ist, wird
         //Der Chart red. Ansonsten Green
         if (chart.tooltip.dataPoints[0].raw >= dataValueArray[0]) {
-          chart.data.datasets[0].borderColor = "#4DA889";
+          chart.data.datasets[0].borderColor = theme.palette.primary.dark;
+          chart.data.datasets[0].backgroundColor = gradient_positiveReturn;
           chart.update();
-          document.getElementById("relative_returne_Box").style.backgroundColor = "#4DA889";
+          document.getElementById("relative_returne_Box").style.backgroundColor = theme.palette.primary.dark;
         } else {
-          chart.data.datasets[0].borderColor = "#B00020";
+          chart.data.datasets[0].borderColor = theme.palette.error.main;
+          chart.data.datasets[0].backgroundColor = gradient_negativeReturn;
           chart.update();
-          document.getElementById("relative_returne_Box").style.backgroundColor = "#B00020";
+          document.getElementById("relative_returne_Box").style.backgroundColor = theme.palette.error.main;
         }
 
         //Dem Price_Label wird hier der aktuelle Wert des Datenpoints zugewiesen.
@@ -113,6 +130,33 @@ const costumeLegend = {
     }
   };
 
+//<------- Tooltip Configuratio ------->
+  const tooltiptitel = (tooltipItems) => {
+    const newLabel = new Date(parseInt(tooltipItems[0].label));
+    return newLabel.toLocaleDateString("de-DE", apiParametersSelection[weekdaySelection]);
+  };
+
+  const LabelRelativeReturne = (tooltipItems) => {
+    const relativeReturnForCurrentValue = RelativeReturnCalc(
+      dataValueArray.at(0),
+      tooltipItems.raw
+    );
+  return relativeReturnForCurrentValue + " %";
+};
+
+const LabelRelativeReturneColor = (tooltipItems) => {
+  if (tooltipItems.raw >= dataValueArray.at(0)) {
+    return theme.palette.primary.dark;
+  } else {
+    return theme.palette.error.main;
+  }
+};
+
+const footerPrice = (tooltipItems) => {
+  return tooltipItems[0].raw;
+};
+
+
   return {
     chartConfig: {
       type: "line",
@@ -120,9 +164,16 @@ const costumeLegend = {
         labels: dataKeyArray,
         datasets: [
           {
+            fill: "start",
+            backgroundColor: gradient_positiveReturn,
+            //fill: {
+            //  target: { value: dataValueArray[0] },
+            //  above: "rgba(107, 178, 151, 0.3)", // Area will be red above the origin
+            //  below: "rgba(201, 24, 74, 0.3)"
+            //}, // And blue below the origin
             label: metaData["2. Symbol"],
             data: dataValueArray,
-            borderColor: "#B00020",
+            borderColor: theme.palette.error.main,
             tension: 0.2,
             borderWidth: 2
           }
@@ -131,6 +182,22 @@ const costumeLegend = {
       plugins: [horizontalDottedLine, tooltipline, costumeLegend],
       options: {
         plugins: {
+          tooltip: {
+            titleFont: {
+              size: 20
+            },
+            footerFont: {
+              size: 14
+            },
+            backgroundColor: theme.palette.borderColor.dark,
+            displayColors: !true,
+            callbacks: {
+              title: tooltiptitel,
+              label: LabelRelativeReturne,
+              footer: footerPrice,
+              labelTextColor: LabelRelativeReturneColor
+            }
+          },
           legend: {
             display: !true,
           },
@@ -155,8 +222,8 @@ const costumeLegend = {
           x: {
             grid: {
               display: !true,
-              borderWidth: 2,
-              borderColor: "#292727"
+              borderWidth: 1,
+              borderColor: theme.palette.borderColor.main
             },
             x: {
               grid: {
@@ -181,8 +248,8 @@ const costumeLegend = {
           },
           y: {
             grid: {
-              borderWidth: 2,
-              borderColor: "#292727",
+              borderWidth: 1,
+              borderColor: theme.palette.borderColor.main,
             }
           }
         },

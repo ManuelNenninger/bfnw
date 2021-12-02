@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { styled } from "@mui/material/styles";
-import EuroIcon from "@mui/icons-material/Euro";
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import SvgIcon from '@mui/material/SvgIcon';
@@ -81,7 +81,7 @@ export default function BoxSx(props) {
                 </Typography>
               </Grid>
               <Grid item>
-                <EuroIcon />
+                <AttachMoneyIcon />
               </Grid>
             </Grid>
           </Grid>

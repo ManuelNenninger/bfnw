@@ -1,7 +1,6 @@
 import * as React from "react";
 
-export default function apiParametersSelection(weekdaySelection){
-
+export default function apiParametersSelection({weekdaySelection, searchContent}){
   let stocksTicker = "";
   let multiplier = "";
   let timeSPan = "";
@@ -19,25 +18,25 @@ export default function apiParametersSelection(weekdaySelection){
     from = getPastDate(1);
     multiplier = "5";
     timeSPan = "minute";
-    return ("https://api.polygon.io/v2/aggs/ticker/AAPL/range/" + multiplier + "/" + timeSPan + "/" + from + "/" + to + "?adjusted=true&sort=asc&limit=5000&apiKey=" + apiKey);
+    return ("https://api.polygon.io/v2/aggs/ticker/" + searchContent + "/range/" + multiplier + "/" + timeSPan + "/" + from + "/" + to + "?adjusted=true&sort=asc&limit=5000&apiKey=");
   }
   const weekParameter = function(){
     from = getPastDate(5);
     multiplier = "30";
     timeSPan = "minute";
-    return ("https://api.polygon.io/v2/aggs/ticker/AAPL/range/" + multiplier + "/" + timeSPan + "/" + from + "/" + to + "?adjusted=true&sort=asc&limit=5000&apiKey=" + apiKey);
+    return ("https://api.polygon.io/v2/aggs/ticker/" + searchContent + "/range/" + multiplier + "/" + timeSPan + "/" + from + "/" + to + "?adjusted=true&sort=asc&limit=5000&apiKey=");
   }
   const monthParameter = function(){
     from = getPastDate(31);
     multiplier = "1";
     timeSPan = "day";
-    return ("https://api.polygon.io/v2/aggs/ticker/AAPL/range/" + multiplier + "/" + timeSPan + "/" + from + "/" + to + "?adjusted=true&sort=asc&limit=5000&apiKey=" + apiKey);
+    return ("https://api.polygon.io/v2/aggs/ticker/" + searchContent + "/range/" + multiplier + "/" + timeSPan + "/" + from + "/" + to + "?adjusted=true&sort=asc&limit=5000&apiKey=");
   }
   const maxParameter = function(){
     from = getPastDate((365*2));
     multiplier = "7";
     timeSPan = "day";
-    return ("https://api.polygon.io/v2/aggs/ticker/AAPL/range/" + multiplier + "/" + timeSPan + "/" + from + "/" + to + "?adjusted=true&sort=asc&limit=5000&apiKey=" + apiKey);
+    return ("https://api.polygon.io/v2/aggs/ticker/" + searchContent + "/range/" + multiplier + "/" + timeSPan + "/" + from + "/" + to + "?adjusted=true&sort=asc&limit=5000&apiKey=");
   }
 
   const apiParametersSelection = {

@@ -12,7 +12,7 @@ export default function BoxSx(props) {
   //<-------- ChartJs Funktion, um den Chart zu erstellen -------->
   const InitialChartJsFunction = async (event) => {
     //Hie wird die Data angefordert. Da auf die Daten gewartet werden muss, ist hier eine await funktion.
-    const { dataValueArray, dataKeyArray, metaData } = await DataRequestPolygonIo(props.weekdaySelection);
+    const { dataValueArray, dataKeyArray, metaData } = await DataRequestPolygonIo({weekdaySelection: props.weekdaySelection, searchContent: props.searchContent});
 
     //Hie wird die Config des Charts angefordert. Übergeben wird dabei die Werte der Response
     let { chartConfig } = chartConfigFunction(
@@ -44,7 +44,7 @@ export default function BoxSx(props) {
       // console.log("Hier wird der aktuelle chart zerstört: " + myChart);
       myChart.destroy();
     };
-  }, [props.weekdaySelection]);
+  }, [props.weekdaySelection, props.searchContent]);
 
   return (
     <Box

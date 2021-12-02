@@ -1,7 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 
 // Create a theme instance.
-//typography: Base Scale 14px und Scale 1.2
+//typography: Base Scale 14px und Scale 1.2 theme.palette.primary.dark
 const theme = createTheme({
   palette: {
     primary: {
@@ -19,6 +19,7 @@ const theme = createTheme({
     },
     borderColor: {
       main: '#bdbdbd',
+      dark: '#292727',
     }
   },
   typography: {

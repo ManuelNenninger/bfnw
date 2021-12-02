@@ -2,9 +2,16 @@ import * as React from "react";
 import Chart from "chart.js/auto";
 import RelativeReturnCalc from "../../calc/relativeReturne";
 import Tooltipline from "../chartPlugIns/tooltipline";
+import theme from '../../../../styles/theme';
 
-export default function cardChartConfig(dataValueArray, dataKeyArray, metaData) {
-  //Dotted Line
+
+export default function cardChartConfig(dataValueArray, dataKeyArray, metaData, chartId, slideIndex) {
+
+  //<-------------- The linear Gradient initialisierung -------------->
+  let canvas = document.getElementById(chartId);
+  let ctx = canvas.getContext("2d");
+  let gradient = ctx.createLinearGradient(0, 0, 0, 100);
+  //<-------------- Dotted Line -------------->
   const horizontalDottedLine = {
     id: "horizontalDottedLine",
     beforeDatasetsDraw(chart, args, options) {
@@ -29,15 +36,39 @@ export default function cardChartConfig(dataValueArray, dataKeyArray, metaData) 
   const relativeChardColor = {
       id: "relativeChardColor",
       beforeDraw: (chart) => {
-        //Setze fest, ob der initial chart green or red ist
+        //<-------- Zuweisung der Werte an die Costume Legend der Card -------->
+        const legendLabel = document.getElementById("Typography_SlideIndex_" + slideIndex + "_RowIndex_0");
+        const relativeReturnLabel = document.getElementById("Typography_SlideIndex_" + slideIndex + "_RowIndex_1");
+        const priceLabel = document.getElementById("Typography_SlideIndex_" + slideIndex + "_RowIndex_2");
+        const relativeReturnIconArrowDropDownIcon = document.getElementById("Relative_Return_ArrowDropDownIcon_SlideIndex_" + slideIndex);
+        const relativeReturnIconArrowDropUpIcon = document.getElementById("Relative_Return_ArrowDropUpIcon_SlideIndex_" +  slideIndex);
+
+
+        legendLabel.innerHTML = metaData;
+        relativeReturnLabel.innerHTML = RelativeReturnCalc(dataValueArray.at(0),dataValueArray.at(-1)) + "%";
+        priceLabel.innerHTML = dataValueArray.at(-1);
+
+        //<-------------- Setze fest, ob der initial chart green or red ist -------------->
         if (dataValueArray[0] >= dataValueArray.at(-1)) {
-          chart.data.datasets[0].borderColor = "#B00020";
+          chart.data.datasets[0].borderColor = theme.palette.error.main;
           chart.update();
-          document.getElementById("relative_returne_Box").style.backgroundColor = "#B00020";
+          relativeReturnLabel.style.color = theme.palette.error.main;
+          relativeReturnIconArrowDropUpIcon.style.display = "none";
+          //Set area on ChartJs to gradient Color
+          gradient.addColorStop(0, "rgba(201, 24, 74, 0.8)");
+          gradient.addColorStop(0.5, "rgba(201, 24, 74, 0.3)");
+          gradient.addColorStop(0.8, "rgba(201, 24, 74, 0.001)");
+          gradient.addColorStop(1, "rgba(201, 24, 74, 0.00)");
         } else {
-          chart.data.datasets[0].borderColor = "#4DA889";
+          chart.data.datasets[0].borderColor = theme.palette.primary.main;
           chart.update();
-          document.getElementById("relative_returne_Box").style.backgroundColor = "#4DA889";
+          relativeReturnLabel.style.color = theme.palette.primary.main;
+          relativeReturnIconArrowDropDownIcon.style.display = "none";
+          //Set area on ChartJs to gradient Color
+          gradient.addColorStop(0, "rgba(107, 178, 151, 0.8)");
+          gradient.addColorStop(0.5, "rgba(107, 178, 151, 0.3)");
+          gradient.addColorStop(0.8, "rgba(107, 178, 151, 0.001)");
+          gradient.addColorStop(1, "rgba(107, 178, 151, 0)");
         }
       }
     };
@@ -49,6 +80,13 @@ export default function cardChartConfig(dataValueArray, dataKeyArray, metaData) 
         labels: dataKeyArray,
         datasets: [
           {
+            fill: true,
+            backgroundColor: gradient,
+            //fill: {
+            //  target: { value: dataValueArray[0] },
+            //  above: "rgba(107, 178, 151, 0.3)", // Area will be red above the origin
+            //  below: "rgba(201, 24, 74, 0.3)"
+            //}, // And blue below the origin
             label: metaData["2. Symbol"],
             data: dataValueArray,
             borderColor: "#B00020",

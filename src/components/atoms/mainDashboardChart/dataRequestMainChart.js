@@ -7,6 +7,7 @@ export default async function test(){
   let dataValueArray = [];
   let dataKeyArray = [];
   let metaData;
+
   //<-------- Fetch Funktion, um Daten zu bekommen -------->
   const InitialRequestFunction = async event => {
 

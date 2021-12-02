@@ -21,14 +21,17 @@ import Appbar from './appbar';
 import EmblaCarousel from "../molecules/carousel/emblaCarousel";
 import TestChart from "../atoms/mainDashboardChart/chartMain";
 import PerformanceDashboard from "../molecules/performanceDashboard";
+import NewsFeed from "./newsFeed";
 
 const drawerWidth = 240;
-const SLIDE_COUNT = 2;
+const SLIDE_COUNT = 1;
 const slides = Array.from(Array(SLIDE_COUNT).keys());
 
 function ResponsiveDrawer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [searchContent, setSearchContent] = React.useState("AAPL");
+
 
 
   const handleDrawerToggle = () => {
@@ -87,6 +90,7 @@ function ResponsiveDrawer(props) {
       <Appbar
         handleDrawerToggle={handleDrawerToggle}
         drawerWidth={drawerWidth}
+        setSearchContent={setSearchContent}
       />
       {/*Ende appbar aus organismus*/}
       <Box
@@ -124,7 +128,8 @@ function ResponsiveDrawer(props) {
       <Box component="main" sx={{ flexGrow: 1, p: 3, width: { xs: '100%', md: `calc(100% - ${drawerWidth}px)` },  }}>
         <Toolbar />
         <EmblaCarousel slides={slides}/>
-        <PerformanceDashboard />
+        <PerformanceDashboard searchContent={searchContent}/>
+        <NewsFeed />
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
           tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non

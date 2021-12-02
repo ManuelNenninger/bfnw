@@ -1,24 +1,24 @@
 import * as React from "react";
 import ApiParametersSelection from "./apiParametersSelection";
 
-export default async function test(weekdaySelection) {
+export default async function test({weekdaySelection, searchContent}) {
   let arrayClosingValue = [];
   let arrayTimeStampValue = [];
   let metaData;
 
   //<-------- Fetch Funktion, um Daten zu bekommen -------->
   const InitialRequestFunction = async (event) => {
-    const apiURL = await ApiParametersSelection(weekdaySelection);
-    const response = await fetch(
-      apiURL,
-      {
-        body: JSON.stringify(),
-        headers: {
-          "Content-Type": "application/json"
-        },
-        method: "GET"
-      }
-    );
+    const apiURL = await ApiParametersSelection({weekdaySelection: weekdaySelection, searchContent: searchContent});
+    const response = await fetch(`api/dataRequestPolygonIo`, {
+          body: JSON.stringify(
+            apiURL
+          ),
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'POST'
+        }
+      );
     const res = await response.json();
 
     arrayClosingValue = res.results.map((object, index) => {
@@ -31,6 +31,7 @@ export default async function test(weekdaySelection) {
     metaData = res.ticker;
 
   };
+
   await InitialRequestFunction();
 
   return {

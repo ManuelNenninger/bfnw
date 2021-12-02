@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useRef } from "react";
 import {
   styled,
   createTheme
@@ -8,42 +9,62 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import AppleIcon from '@mui/icons-material/Apple';
-import EuroIcon from '@mui/icons-material/Euro';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import SvgIcon from '@mui/material/SvgIcon';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import MobileCardCarousel from "../../atoms/carouselComponents/mobileCardCarousel";
 import ChartCarouselCard from "../../atoms/carouselComponents/chartCarouselCard";
+import theme from '../../../../styles/theme';
+import DataRequestPolygonIo from "../../atoms/mainDashboardChart/dataRequestPolygonIo";
+
 
 const mobile = MobileCardCarousel;
 
 
 const ArrayContent = [
   {
-    icon: AppleIcon,
-    content: "Apple",
+    icon: FiberManualRecordIcon,
     typographyVariant: "subtitle2",
+    typographyVariantmobile: "h6",
   },
   {
     icon: ArrowDropUpIcon,
-    content: "2,1%",
     typographyVariant: "body2",
+    typographyVariantmobile: "body2",
   },
   {
-    icon: EuroIcon,
-    content: "130",
+    icon: AttachMoneyIcon,
     typographyVariant: "h4",
+    typographyVariantmobile: "h6",
   }
 ]
 
 export default function RecipeReviewCard(props) {
-const theme = createTheme();
+  //Hier sind die Standart Ticker für den Carousel. Spaeter ersetzen.
+  const carouselCardTickerSelection = {
+    "0": "OTLY",
+    "1": "GME",
+    "2": "TSLA",
+    "3": "AAPL",
+    "4": "SA",
+  };
 
 
+  //<-------- ChartJs Funktion, um den Chart zu erstellen -------->
+  // const InitialDataRequestForChardforCard = async (event) => {
+  //   //Hie wird die Data angefordert. Da auf die Daten gewartet werden muss, ist hier eine await funktion.
+  //    const { dataValueArray, dataKeyArray, metaData } = await DataRequestPolygonIo({weekdaySelection: "week", searchContent: carouselCardTickerSelection[props.slideIndex]});
+  //    dataValue = dataValueArray;
+  // };
+  //
+  // useEffect(() => {
+  // InitialDataRequestForChardforCard();
+  // }, []);
 
   return (
-    <Box sx={{ width: "100%", height: '100%', border: {xs: 0, md: 1},borderRadius: 5, borderColor: {md: 'borderColor.main'},}}>
+    <Box sx={{ width: "100%", border: {xs: 0, md: 1},borderRadius: 5, borderColor: {md: 'borderColor.main'},}}>
       <Box sx={{padding: theme.spacing(1, 2), borderRadius: {xs: 10, md: "none"}, border: {xs: 1, md: "none"}, display: {xs: "inline-block", md: "block"} }}>
         {/* Render bei größer Medium Size die full Cards des Carousels */}
       <Box sx={{ display: { xs: 'none', md: 'block' } }}>
@@ -53,7 +74,6 @@ const theme = createTheme();
               justifyContent="space-between"
               alignItems="center">
           <Grid item xs={6} zeroMinWidth>
-
             <Grid container
                 direction="column"
                 alignItems="flex-start"
@@ -67,17 +87,20 @@ const theme = createTheme();
                         alignItems="center"
                         >
                       <Grid item >
-                        <SvgIcon
-                          component={contentObject.icon}
-                          sx={{ color: contentObject.icon === ArrowDropUpIcon ? ("#4caf50") : (contentObject.icon === ArrowDropDownIcon ? ("#4caf50") : (theme.palette.text.primary))}}
-                        />
+                        {index === 1 ? (<>
+                          <SvgIcon id={"Relative_Return_ArrowDropUpIcon_SlideIndex_" +  props.slideIndex} sx={{color: theme.palette.primary.main}} component={ArrowDropUpIcon} /> <SvgIcon id={"Relative_Return_ArrowDropDownIcon_SlideIndex_" +  props.slideIndex} sx={{color: theme.palette.error.main}} component={ArrowDropDownIcon} />
+                          </>)
+                          :
+                          <SvgIcon component={contentObject.icon} /> }
                       </Grid>
                       <Grid item >
                         <Typography
-                          sx={{marginLeft: theme.spacing(1), color: contentObject.icon === ArrowDropUpIcon ? ("#4caf50") : (contentObject.icon === ArrowDropDownIcon ? ("#4caf50") : (theme.palette.text.primary))}}
+                          sx={{marginLeft: theme.spacing(1)}}
                           variant={contentObject.typographyVariant}
-                          component="div">
-                            {contentObject.content}
+                          component="div"
+                          id={"Typography_SlideIndex_" + props.slideIndex + "_RowIndex_"+ index}
+                        >
+                            loading...
                         </Typography>
                       </Grid>
                     </Grid>
@@ -105,6 +128,7 @@ const theme = createTheme();
         <Box sx={{ display: { xs: 'block', md: 'none' } }}>
           <MobileCardCarousel
             ArrayContent={ArrayContent}
+            slideIndex={props.slideIndex}
           />
         </Box>
       </Box>
