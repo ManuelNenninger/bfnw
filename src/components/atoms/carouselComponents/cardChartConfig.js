@@ -45,11 +45,11 @@ export default function cardChartConfig(dataValueArray, dataKeyArray, metaData, 
 
 
         legendLabel.innerHTML = metaData;
-        relativeReturnLabel.innerHTML = RelativeReturnCalc(dataValueArray.at(0),dataValueArray.at(-1)) + "%";
-        priceLabel.innerHTML = dataValueArray.at(-1);
+        relativeReturnLabel.innerHTML = RelativeReturnCalc(dataValueArray[0],dataValueArray[dataValueArray.length - 1]) + "%";
+        priceLabel.innerHTML = dataValueArray[dataValueArray.length - 1];
 
         //<-------------- Setze fest, ob der initial chart green or red ist -------------->
-        if (dataValueArray[0] >= dataValueArray.at(-1)) {
+        if (dataValueArray[0] >= dataValueArray[dataValueArray.length - 1]) {
           chart.data.datasets[0].borderColor = theme.palette.error.main;
           chart.update();
           relativeReturnLabel.style.color = theme.palette.error.main;

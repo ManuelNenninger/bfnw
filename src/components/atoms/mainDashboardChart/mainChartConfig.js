@@ -88,10 +88,10 @@ const costumeLegend = {
       const relativeReturnLabel = document.getElementById("relative_returne");
       //Initiales zuweisen des Costume Legend
       legendLabel.innerHTML = metaData;
-      relativeReturnLabel.innerHTML = RelativeReturnCalc(dataValueArray.at(0),dataValueArray.at(-1));
+      relativeReturnLabel.innerHTML = RelativeReturnCalc(dataValueArray[0],dataValueArray[dataValueArray.length - 1]);
 
       //Setze fest, ob der initial chart green or red ist
-      if (dataValueArray[0] >= dataValueArray.at(-1)) {
+      if (dataValueArray[0] >= dataValueArray[dataValueArray.length - 1]) {
         chart.data.datasets[0].borderColor = theme.palette.error.main;
         chart.data.datasets[0].backgroundColor = gradient_negativeReturn;
         chart.update();
@@ -124,8 +124,7 @@ const costumeLegend = {
         //Hier wird dem Label relative_Return der Wert zugewiesen. Davor allerdings berechnet.
         relativeReturnLabel.innerHTML = RelativeReturnCalc(dataValueArray[0], chart.tooltip.dataPoints[0].raw);
       } else {
-        priceLabel.innerHTML = dataValueArray.at(-1);
-        //console.log(dataValueArray.at(-1));
+        priceLabel.innerHTML = dataValueArray[dataValueArray.length - 1];
       }
     }
   };
@@ -138,14 +137,14 @@ const costumeLegend = {
 
   const LabelRelativeReturne = (tooltipItems) => {
     const relativeReturnForCurrentValue = RelativeReturnCalc(
-      dataValueArray.at(0),
+      dataValueArray[0],
       tooltipItems.raw
     );
   return relativeReturnForCurrentValue + " %";
 };
 
 const LabelRelativeReturneColor = (tooltipItems) => {
-  if (tooltipItems.raw >= dataValueArray.at(0)) {
+  if (tooltipItems.raw >= dataValueArray[0]) {
     return theme.palette.primary.dark;
   } else {
     return theme.palette.error.main;

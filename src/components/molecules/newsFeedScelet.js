@@ -11,8 +11,9 @@ import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Zoom from "@mui/material/Zoom";
 import TabsGroup from "../atoms/newsFeed/tabsButton";
+import NewsCardGenerator from "../atoms/newsFeed/newsCard/newsCardGenerator";
 import theme from "../../../styles/theme";
-
+import { useEffect, useRef } from "react";
 
 function ScrollTop(props) {
   const { children, window } = props;
@@ -25,11 +26,11 @@ function ScrollTop(props) {
     threshold: 400
   });
 
+
   const handleClick = (event) => {
     const anchor = (event.target.ownerDocument || document).querySelector(
       "#back-to-top-anchor"
     );
-
     if (anchor) {
       //https://developer.mozilla.org/de/docs/Web/API/Element/scrollIntoView
       anchor.scrollIntoView({
@@ -52,16 +53,27 @@ function ScrollTop(props) {
   );
 }
 
-ScrollTop.propTypes = {
-  children: PropTypes.element.isRequired,
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func
-};
+
 
 export default function BackToTop(props) {
+  //Setze hier den Anfangswert, für wie viele Cards am anfang gezeigt werden.
+  const [numberOfNewsCards, setNumberOfNewsCards] = React.useState(6);
+
+
+  function OnScrollEvent() {
+    // console.log('Window height (px):' + window.innerHeight)
+    // console.log('Currently scrolled from top (px):' + window.pageYOffset)
+    // console.log('Document height(px):' + document.body.offsetHeight)
+    if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+      setNumberOfNewsCards(prev => prev + 3)
+      console.log("You reached the bottom of the window.");
+    }
+  }
+
+useEffect(() => {
+    window.addEventListener("scroll", OnScrollEvent);
+}, []);
+
   return (
     <React.Fragment>
     <Box sx={{mt: theme.spacing(3),}}>
@@ -83,17 +95,10 @@ export default function BackToTop(props) {
           <TabsGroup />
         </Toolbar>
       </AppBar>
-      <Box component="main_newsFeed">
-        <Box sx={{ my: 2 }}>
-          {[...new Array(12)]
-            .map(
-              () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
-            )
-            .join("\n")}
-        </Box>
+      <Box id="mainNewsFeed" sx={{my: 4}}  >
+        <NewsCardGenerator
+          numberOfNewsCards={numberOfNewsCards}
+        />
       </Box>
       <ScrollTop {...props}>
         <Fab sx={{backgroundColor: theme.palette.secondary.light}} size="small" aria-label="scroll back to top">

@@ -56,9 +56,9 @@ export default function MobileCardCarousel(props) {
     const { dataValueArray, dataKeyArray, metaData } = await DataRequestPolygonIo({weekdaySelection: "week", searchContent: carouselCardTickerSelection[props.slideIndex]});
     //Hier werden die Daten in die HTML Elemente injeziert
     document.getElementById("Mobile_Typography_SlideIndex_" + props.slideIndex + "_RowIndex_0").innerHTML = metaData;
-    document.getElementById("Mobile_Typography_SlideIndex_" + props.slideIndex + "_RowIndex_1").innerHTML = RelativeReturnCalc(dataValueArray.at(0),dataValueArray.at(-1)) + "%";
-    document.getElementById("Mobile_Typography_SlideIndex_" + props.slideIndex + "_RowIndex_2").innerHTML = dataValueArray.at(-1);
-    if (dataValueArray[0] >= dataValueArray.at(-1)) {
+    document.getElementById("Mobile_Typography_SlideIndex_" + props.slideIndex + "_RowIndex_1").innerHTML = RelativeReturnCalc(dataValueArray[0],dataValueArray[dataValueArray.length - 1]) + "%";
+    document.getElementById("Mobile_Typography_SlideIndex_" + props.slideIndex + "_RowIndex_2").innerHTML = dataValueArray[dataValueArray.length - 1];
+    if (dataValueArray[0] >= dataValueArray[dataValueArray.length - 1]) {
       document.getElementById("Mobile_Relative_Return_ArrowDropUpIcon_SlideIndex_" +  props.slideIndex).style.display = "none";
       document.getElementById("Mobile_Typography_SlideIndex_" + props.slideIndex + "_RowIndex_1").style.color = theme.palette.error.main;
     } else {
