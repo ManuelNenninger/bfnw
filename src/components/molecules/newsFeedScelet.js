@@ -57,7 +57,8 @@ function ScrollTop(props) {
 
 export default function BackToTop(props) {
   //Setze hier den Anfangswert, für wie viele Cards am anfang gezeigt werden.
-  const [numberOfNewsCards, setNumberOfNewsCards] = React.useState(6);
+  const [bottomOfNewsFeedCounter, setBottomOfNewsFeedCounter] = React.useState(0);
+  const [selectedInterest, setSelectedInterest] = React.useState(0);
 
 
   function OnScrollEvent() {
@@ -65,7 +66,7 @@ export default function BackToTop(props) {
     // console.log('Currently scrolled from top (px):' + window.pageYOffset)
     // console.log('Document height(px):' + document.body.offsetHeight)
     if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
-      setNumberOfNewsCards(prev => prev + 3)
+      setBottomOfNewsFeedCounter(prev => prev + 1)
       console.log("You reached the bottom of the window.");
     }
   }
@@ -92,12 +93,16 @@ useEffect(() => {
         }}
       >
         <Toolbar id="back-to-top-anchor">
-          <TabsGroup />
+          <TabsGroup
+            selectedInterest={selectedInterest}
+            setSelectedInterest={setSelectedInterest}
+          />
         </Toolbar>
       </AppBar>
       <Box id="mainNewsFeed" sx={{my: 4}}  >
         <NewsCardGenerator
-          numberOfNewsCards={numberOfNewsCards}
+          bottomOfNewsFeedCounter={bottomOfNewsFeedCounter}
+          selectedInterest={selectedInterest}
         />
       </Box>
       <ScrollTop {...props}>

@@ -65,9 +65,9 @@ export default function RecipeReviewCard(props) {
 
   return (
     <Box sx={{ width: "100%", border: {xs: 0, md: 1},borderRadius: 5, borderColor: {md: 'borderColor.main'},}}>
-      <Box sx={{padding: theme.spacing(1, 2), borderRadius: {xs: 10, md: "none"}, border: {xs: 1, md: "none"}, display: {xs: "inline-block", md: "block"} }}>
-        {/* Render bei größer Medium Size die full Cards des Carousels */}
-      <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+      <Box sx={{padding: theme.spacing(1, 2), borderRadius: {xs: 10, md: "none"}, border: {xs: 1, md: "none"}, display: {xs: "inline-block", md: "block"}, minWidth: "300px",}}>
+        {/* Render bei größer Medium Size die full Cards des Carousels display: { xs: 'none', md: 'block' } */}
+      <Box sx={{ display: { xs: 'block'} }}>
         <Grid container
               spacing={0}
               direction="row"
@@ -125,12 +125,12 @@ export default function RecipeReviewCard(props) {
         </Grid>
         </Box>
         {/* Render bei Medium Size die mobile Cards des Carousels */}
-        <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+        {/*<Box sx={{ display: { xs: 'block', md: 'none' } }}>
           <MobileCardCarousel
             ArrayContent={ArrayContent}
             slideIndex={props.slideIndex}
           />
-        </Box>
+        </Box>*/}
       </Box>
 
     </Box>

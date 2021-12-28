@@ -11,12 +11,13 @@ import HomeWorkIcon from "@mui/icons-material/HomeWork";
 import DeviceHubIcon from "@mui/icons-material/DeviceHub";
 import theme from "../../../../styles/theme";
 
-export default function ScrollableTabsButtonAuto() {
+export default function ScrollableTabsButtonAuto(props) {
   const [valueOne, setValueOne] = React.useState(0);
-  const [value, setValue] = React.useState(0);
+  //const [selectedInterest, setSelectedInterest] = React.useState(0);
+  const { selectedInterest, setSelectedInterest } = props;
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleChangeSelectedInterest = (event, newValue) => {
+    setSelectedInterest(newValue);
   };
   const handleChangeOne = (event, newValue) => {
     setValueOne(newValue);
@@ -39,8 +40,8 @@ export default function ScrollableTabsButtonAuto() {
             variant="scrollable"
             aria-label="scrollable auto tabs example"
           >
-            <Tab icon={<PersonPinIcon />} label="Personal News" />
-            <Tab icon={<PublicIcon />} label="Market News" />
+            <Tab icon={<PersonPinIcon />} label="Market News" />
+            <Tab icon={<PublicIcon />} disabled label="Personal News" />
           </Tabs>
         </Grid>
         <Grid item xs zeroMinWidth>
@@ -49,15 +50,15 @@ export default function ScrollableTabsButtonAuto() {
             indicatorColor="primary"
             scrollButtons={true}
             allowScrollButtonsMobile
-            value={value}
-            onChange={handleChange}
+            value={selectedInterest}
+            onChange={handleChangeSelectedInterest}
             variant="scrollable"
             aria-label="scrollable auto tabs example"
           >
+            <Tab icon={<AccountBalanceIcon />} label="Alle Themen" />
             <Tab icon={<ShowChartIcon />} label="Aktien" />
             <Tab icon={<DeviceHubIcon />} label="Crypto" />
-            <Tab icon={<AccountBalanceIcon />} label="Generell" />
-            <Tab icon={<HomeWorkIcon />} label="Immobilien" />
+            <Tab icon={<HomeWorkIcon />} label="Allgemein" />
           </Tabs>
         </Grid>
       </Grid>

@@ -1,11 +1,12 @@
 import * as React from "react";
+import ApiParametersSelectionNYT from "./apiParametersSelectionNYT";
 
-export default async function test() {
+export default async function test(props) {
   let dataResponseArray = [];
 
   //<-------- Fetch Funktion, um Daten zu bekommen -------->
   const InitialRequestFunction = async (event) => {
-    const apiURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?begin_date=20211201&end_date=20211206&q=Tesla&sort=relevance&api-key=";
+    const apiURL = await ApiParametersSelectionNYT(props);
     const response = await fetch(`api/dataRequestNYT`, {
           body: JSON.stringify(
             apiURL

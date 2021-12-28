@@ -10,9 +10,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
-
-
-
 const CostumeAutocomplete = styled(Autocomplete)(({ theme }) => ({
   "& .MuiInputBase-root": {
     padding: "4px"
@@ -57,6 +54,10 @@ export default function Asynchronous(props) {
 
   //<--------- State fuer die Search eingabe --------->
   function handlePaperClick(event) {
+    //Wenn kein Suchergebis vorliegt aber dennoch auf die Auswahl geklickt wird, wird nichts durchgefuehrt
+    if(event === "-"){
+      return;
+    }
     props.setSearchContent(event);
   }
 
@@ -91,8 +92,13 @@ export default function Asynchronous(props) {
       const res = await response.json();
 
       if (active) {
-        setOptions([...res.results]);
-        setLoading(false);
+        if(res.results == null){
+          setOptions([{name: "No Results on NASDAQ", ticker: "-"}]);
+          setLoading(false);
+        } else {
+          setOptions([...res.results]);
+          setLoading(false);
+        }
       }
     })();
 

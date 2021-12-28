@@ -20,7 +20,10 @@ const theme = createTheme({
     borderColor: {
       main: '#bdbdbd',
       dark: '#292727',
-    }
+    },
+    mentionsColor: {
+      main: '#1DA1F2',
+    },
   },
   typography: {
     h1: {

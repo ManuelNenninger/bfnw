@@ -1,5 +1,5 @@
 export default async function searchRequestNYT(req, res) {
-  const apiURL = (req.body + process.env.NYT_KEY);
+  const apiURL = (req.body + "&api-key=" + process.env.NYT_KEY);
   // const apiURL = (req.body);
   const response = await fetch(
     apiURL,

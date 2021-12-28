@@ -12,22 +12,29 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import ArticleIcon from '@mui/icons-material/Article';
 import GetPublisherDateDifference from "../getPublisherDateDifference";
+import theme from "../../../../../styles/theme";
+import EmbellishedText from "../EmbellishedTextGenerator";
 
 export default function MediaCard(props) {
   const [pubDate, setPubDate] = React.useState()
-    React.useEffect(() => {
-      const publisherDate = GetPublisherDateDifference({publisherDate: props.articleObject.contentData.publisherDate});
-      setPubDate(publisherDate);
-    }, []);
+  React.useEffect(() => {
+    const publisherDate = GetPublisherDateDifference({
+      publisherDate: props.articleObject.contentData.publisherDate
+    });
+    setPubDate(publisherDate);
+  }, []);
 
-    const iconSelection = {
-      "The New York Times": (<ArticleIcon sx={{ backgroundColor: "#adb5bd", borderRadius: "50%", p: 0.5, }} />),
-      "Twitter": (<TwitterIcon sx={{ backgroundColor: "#1DA1F2", borderRadius: "50%", p: 0.5, }} />),
-    };
-    const placeHolderImageURL = {
-      "The New York Times": false,
-      "Twitter": "https://pbs.twimg.com/media/EYeX7akWsAIP1_1.jpg",
-    }
+  const iconSelection = {
+    "The New York Times": (<ArticleIcon sx={{ backgroundColor: "#adb5bd", borderRadius: "50%", p: 0.5, }} />),
+    "Twitter": (<TwitterIcon sx={{ backgroundColor: theme.palette.mentionsColor.main, borderRadius: "50%", p: 0.5, }} />),
+  };
+
+  const placeHolderImageURL = {
+    "The New York Times": false,
+    "Twitter": "https://pbs.twimg.com/media/EYeX7akWsAIP1_1.jpg",
+  }
+
+
 
   return (
     <Card sx={{ maxWidth: 310, p: 1, border: 1, borderColor: "#bdbdbd" }}>
@@ -50,9 +57,9 @@ export default function MediaCard(props) {
       <CardContent>
         <Typography gutterBottom variant="body2" component="div">
           {pubDate} ago
-        </Typography>
+        </Typography><span></span>
         <Typography gutterBottom variant="h6" component="div">
-          {props.articleObject.contentData.headline}
+          <EmbellishedText {...props}/>
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {props.articleObject.contentData.contentText}

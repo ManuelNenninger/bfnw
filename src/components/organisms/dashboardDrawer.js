@@ -24,7 +24,7 @@ import PerformanceDashboard from "../molecules/performanceDashboard";
 import NewsFeed from "./newsFeed";
 
 const drawerWidth = 240;
-const SLIDE_COUNT = 1;
+const SLIDE_COUNT = 2;
 const slides = Array.from(Array(SLIDE_COUNT).keys());
 
 function ResponsiveDrawer(props) {

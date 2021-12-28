@@ -1,12 +1,29 @@
-export default function apiParametersSelectionTwitter(props) {
+import * as React from "react";
+import ReturnUserInterests from "../../../userData/personalUserInterests";
 
-  const userDataInterests = ["dogecoin", "doge", "bitcoin", "stoks", "aktie", "crypto", "etf", "inflation"]
-  const personsOfInterest = ["elonmusk", "finanzfluss"]
+export default async function apiParametersSelectionTwitter(props) {
+  let userDataInterests = []
+  const { selectedInterest } = props;
+  console.log("Es ist Thema: " + selectedInterest + " ausgewählt für Twitter");
+  // let userDataCryptoInterests = ["dogecoin", "doge", "bitcoin", "ethereum", "eth", "ripple", "btc", "coin", "Krypto",]
+  // let userDataStocksInterests = ["stocks", "stonks", "aktien", "apple", "tesla", "gme", "gamestop", "oatly", "square", "facebook",]
+  // let userDataGeneralInterests = ["inflation", "ezb", "fet", "crash", "rendite", "feature", "meta", "dividende", "ipo", "msci", "china", "sparen", "steuer", "tax"]
+  // let personsOfInterest = ["elonmusk", "finanzfluss", "talerbox", "AlleAktien", "aktiengram", "justETF", "RayDalio",]
+  let {userDataCryptoInterests, userDataStocksInterests, userDataGeneralInterests, personsOfInterest} = await ReturnUserInterests();
+
+  const selectInterestArrays = {
+      0: userDataCryptoInterests.concat(userDataStocksInterests).concat(userDataGeneralInterests),
+      1: userDataStocksInterests,
+      2: userDataCryptoInterests,
+      3: userDataGeneralInterests,
+  };
+
   //Default Parameter für Twitter
+  //https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-recent#Optional
   let paramsTest1 = {
     "query": ["crypto (from:binance OR from:finanzfluss OR from:talerbox OR from:TradeRepublicDE OR from:Finanzwesir)"],
     "max_results": [
-      "10"
+      "100"
     ],
     "tweet.fields": [
       "created_at",
@@ -14,10 +31,12 @@ export default function apiParametersSelectionTwitter(props) {
       "public_metrics",
       "lang",
       "text",
+      "entities",
     ],
     "expansions": [
       "attachments.media_keys",
       "referenced_tweets.id.author_id",
+      "entities.mentions.username",
     ],
     "place.fields": [
       "country",
@@ -43,6 +62,11 @@ export default function apiParametersSelectionTwitter(props) {
     //Hier werden die Suchbegriffe (wie z.B Crypto, Apple, etc) hinzugefügt
     const newQueryStringGenerator = function() {
       let q = "";
+
+      //<--------- Fuege alle interests-Arrays zusammen --------->
+      //Je nach dem welche selectedInterest ausgewaehlt sind, werden hier andere Arrays zusammengesetzt
+      userDataInterests = selectInterestArrays[selectedInterest];
+
       userDataInterests.map(function(interest, index) {
         if (index === 0) {
           q += ("(" + interest + " OR ");
@@ -69,8 +93,8 @@ export default function apiParametersSelectionTwitter(props) {
         }
 
       });
-      console.log("Der neue Query string lautet: " + q);
       return q;
+      //return "Dividende from:aktiengram"
     }
     //Erstelle den neuen query string
     //Wir zusammengebaut aus Interessen und Personen von Interessen (z.B Influencer, Blogs, etc)
