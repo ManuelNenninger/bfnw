@@ -31,7 +31,7 @@
 /* Wenn Du die 25% zu etwas veränderst, muss Du ggf einfach Copie & Paste bei const [viewportRef, embla] ...  */
 .embla__slide {
   position: relative;
-  /* min-width: 25%; */
+  min-width: 25%;
   padding-left: 15px;
 }
 

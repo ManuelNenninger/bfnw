@@ -16,7 +16,7 @@ export default function BoxSx(props) {
         paddingTop: 2,
       }}>
         <Grid container spacing={3}>
-          <Grid item xs={8}>
+          <Grid item xs={12} md={8}>
             <Box sx={{
                     width: "100%",
                     height: "100%",
@@ -25,11 +25,11 @@ export default function BoxSx(props) {
                   <MainChart weekdaySelection={weekdaySelection} searchContent={props.searchContent}/>
             </Box>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} md={4}>
             <Box sx={{
                     width: "100%",
-                    pl: 2,
-                    borderLeft: 1,
+                    pl: {xs: "none", md: 2},
+                    borderLeft: {xs: "none", md: 1},
                     borderColor: 'borderColor.main',
                   }}>
                   <PerformanceTable/>

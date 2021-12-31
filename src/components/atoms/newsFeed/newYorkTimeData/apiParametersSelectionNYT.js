@@ -4,7 +4,6 @@ import ReturnUserInterests from "../../../userData/personalUserInterests";
 export default async function apiParametersSelectionNYT(props) {
   let userDataInterests = []
   const { selectedInterest } = props;
-  console.log("Es ist Thema: " + selectedInterest + " ausgewählt für NYT");
 
   // let userDataCryptoInterests = ["dogecoin", "doge", "bitcoin", "ethereum", "eth", "ripple", "btc", "coin", "Krypto",]
   // let userDataStocksInterests = ["stocks", "stonks", "aktien", "apple", "tesla", "gme", "gamestop", "oatly", "square", "facebook", "finance", "meta"]
@@ -41,10 +40,10 @@ export default async function apiParametersSelectionNYT(props) {
       todayDate.toString(),
     ],
     "sort": [
-      "relevance",
+      "newest",
     ],
     "page": [
-      "3",
+      "5",
     ],
     "fq": [
       "headline:(dogecoin krypto bitcoin eth ripple meta ipo china fet inflation btc stock stonks)"
@@ -80,14 +79,15 @@ export default async function apiParametersSelectionNYT(props) {
       return fq;
     }
     //Erstelle den neuen filter-query string, der auf den Interessen des User besteht
-    const newQueryString = await newQueryStringGenerator();
+    let newQueryString = await newQueryStringGenerator();
+    //Für diese API muss der verknuepfungs Operator ein AND sein
+    newQueryString = newQueryString.replaceAll("+", "AND");
 
     //Loesche den default filter-query (fq) und update Ihn mit dem neuen query-String.
     searchParams.delete("fq");
     searchParams.set("fq", newQueryString)
     //Die neue search-URL bekommt die eben genauten searchParameter mit dem neuen query String
     url.search = searchParams.toString();
-    console.log(url.href + "&api-key=58mD2PwJPL9PGQgwMm3fl16GI3YGd8Tt#");
     return url
   }
   return(parameterGenerator());

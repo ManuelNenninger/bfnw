@@ -4,7 +4,6 @@ import ReturnUserInterests from "../../../userData/personalUserInterests";
 export default async function apiParametersSelectionTwitter(props) {
   let userDataInterests = []
   const { selectedInterest } = props;
-  console.log("Es ist Thema: " + selectedInterest + " ausgewählt für Twitter");
   // let userDataCryptoInterests = ["dogecoin", "doge", "bitcoin", "ethereum", "eth", "ripple", "btc", "coin", "Krypto",]
   // let userDataStocksInterests = ["stocks", "stonks", "aktien", "apple", "tesla", "gme", "gamestop", "oatly", "square", "facebook",]
   // let userDataGeneralInterests = ["inflation", "ezb", "fet", "crash", "rendite", "feature", "meta", "dividende", "ipo", "msci", "china", "sparen", "steuer", "tax"]
@@ -98,15 +97,14 @@ export default async function apiParametersSelectionTwitter(props) {
     }
     //Erstelle den neuen query string
     //Wir zusammengebaut aus Interessen und Personen von Interessen (z.B Influencer, Blogs, etc)
-    const newQueryString = await newQueryStringGenerator();
-    //const newQueryString = "crypto (from:binance OR from:finanzfluss OR from:talerbox OR from:TradeRepublicDE OR from:Finanzwesir)";
+    let newQueryString = await newQueryStringGenerator();
+    newQueryString = newQueryString.replaceAll(" +", "");
 
     //Loesche den default query und update Ihn mit dem neuen query-String.
     searchParams.delete("query");
     searchParams.set("query", newQueryString)
     //Die neue search-URL bekommt die eben genauten searchParameter mit dem neuen query String
     url.search = searchParams.toString();
-    console.log(url.href);
     return url
   }
   return (parameterGenerator());

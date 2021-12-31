@@ -31,7 +31,7 @@ function ResponsiveDrawer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [searchContent, setSearchContent] = React.useState("AAPL");
-
+  const [interestsInFocusArray, setInterestsInFocusArray] = React.useState(["OTLY"]);
 
 
   const handleDrawerToggle = () => {
@@ -127,7 +127,7 @@ function ResponsiveDrawer(props) {
       </Box>
       <Box component="main" sx={{ flexGrow: 1, p: 3, width: { xs: '100%', md: `calc(100% - ${drawerWidth}px)` },  }}>
         <Toolbar />
-        <EmblaCarousel slides={slides}/>
+        <EmblaCarousel slides={slides} interestsInFocusArray={interestsInFocusArray} setInterestsInFocusArray={setInterestsInFocusArray}/>
         <PerformanceDashboard searchContent={searchContent}/>
         <NewsFeed />
         {/*<Typography paragraph>

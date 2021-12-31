@@ -2,14 +2,18 @@ import React, { useState, useEffect, useCallback } from "react";
 import { PrevButton, NextButton } from "../../atoms/carouselComponents/emblaCarouselButtons";
 import useEmblaCarousel from "embla-carousel-react";
 import CarouselCard from "./cardCarousel";
+import AddCardComponent from "../../atoms/carouselComponents/addCardComponent";
+import PersonalUserInterests from "../../userData/personalUserInterests";
 
-const EmblaCarousel = ({ slides }) => {
+const EmblaCarousel = (props) => {
   const [viewportRef, embla] = useEmblaCarousel({
      dragFree: true,
      containScroll: "trimSnaps"
    });
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
+  //const [interestsInFocusArray, setInterestsInFocusArray] = useState(["OTLY"]);
+  const {interestsInFocusArray, setInterestsInFocusArray} = props
 
   const scrollPrev = useCallback(() => embla && embla.scrollPrev(), [embla]);
   const scrollNext = useCallback(() => embla && embla.scrollNext(), [embla]);
@@ -25,14 +29,23 @@ const EmblaCarousel = ({ slides }) => {
     onSelect();
   }, [embla, onSelect]);
 
+
   return (
     <div className="embla">
       <div className="embla__viewport" ref={viewportRef}>
         <div className="embla__container">
-          {slides.map((slide, index) => (
+        <div className="embla__slide" key={"embla__slide_index_" + "AddCardComponent"}>
+          <div className="embla__slide__inner">
+            <AddCardComponent
+              setInterestsInFocusArray={setInterestsInFocusArray}
+            />
+          </div>
+        </div>
+          {interestsInFocusArray.map((tickerForCard, index) => (
             <div className="embla__slide" key={"embla__slide_index_" + index}>
               <div className="embla__slide__inner">
                 <CarouselCard
+                  tickerForCard={tickerForCard}
                   slideIndex={index}
                 />
               </div>

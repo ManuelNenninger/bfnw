@@ -52,6 +52,8 @@ export default function RecipeReviewCard(props) {
   };
 
 
+
+
   //<-------- ChartJs Funktion, um den Chart zu erstellen -------->
   // const InitialDataRequestForChardforCard = async (event) => {
   //   //Hie wird die Data angefordert. Da auf die Daten gewartet werden muss, ist hier eine await funktion.
@@ -118,7 +120,7 @@ export default function RecipeReviewCard(props) {
           }}
         >
         <ChartCarouselCard
-          slideIndex={props.slideIndex}
+          {...props}
         />
         </Box>
           </Grid>

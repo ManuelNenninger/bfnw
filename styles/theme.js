@@ -26,6 +26,7 @@ const theme = createTheme({
     },
   },
   typography: {
+    //fontFamily: "'IBM Plex Mono', monospace",
     h1: {
       fontSize: "2.986rem",
     },
