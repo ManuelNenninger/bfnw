@@ -18,7 +18,7 @@ import MobileCardCarousel from "../../atoms/carouselComponents/mobileCardCarouse
 import ChartCarouselCard from "../../atoms/carouselComponents/chartCarouselCard";
 import theme from '../../../../styles/theme';
 import DataRequestPolygonIo from "../../atoms/mainDashboardChart/dataRequestPolygonIo";
-
+import { useAppContext } from "../../../appContext";
 
 const mobile = MobileCardCarousel;
 
@@ -42,6 +42,10 @@ const ArrayContent = [
 ]
 
 export default function RecipeReviewCard(props) {
+  let { tickerForCard } = props
+  let value = useAppContext();
+
+
   //Hier sind die Standart Ticker für den Carousel. Spaeter ersetzen.
   const carouselCardTickerSelection = {
     "0": "OTLY",
@@ -65,11 +69,17 @@ export default function RecipeReviewCard(props) {
   // InitialDataRequestForChardforCard();
   // }, []);
 
+  function handleCardClick(event){
+    console.log("Ich wurde geklickt: ");
+    console.log(tickerForCard);
+    value.setSearchContent(tickerForCard);
+  }
+
   return (
     <Box sx={{ width: "100%", border: {xs: 0, md: 1},borderRadius: 5, borderColor: {md: 'borderColor.main'},}}>
       <Box sx={{padding: theme.spacing(1, 2), borderRadius: {xs: 10, md: "none"}, border: {xs: 1, md: "none"}, display: {xs: "inline-block", md: "block"}, minWidth: "300px",}}>
         {/* Render bei größer Medium Size die full Cards des Carousels display: { xs: 'none', md: 'block' } */}
-      <Box sx={{ display: { xs: 'block'} }}>
+      <Box sx={{ display: { xs: 'block'} }} onClick={() => handleCardClick(event)}>
         <Grid container
               spacing={0}
               direction="row"

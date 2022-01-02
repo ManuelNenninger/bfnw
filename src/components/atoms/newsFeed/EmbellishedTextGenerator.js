@@ -9,7 +9,7 @@ import theme from "../../../../styles/theme";
 
 export default function EmbellishedText(props) {
   let menstions = [];
-  
+
   //<----- Wenn mentions vorhanden sind, push in das menstions-Array  ----->
   if (props.articleObject.contentData.entitiesForText?.mentions != null) {
     //<----- Fuege die mentions in das mentions-Array hinzu ----->

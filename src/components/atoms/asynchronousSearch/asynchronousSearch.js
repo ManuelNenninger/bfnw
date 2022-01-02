@@ -9,6 +9,8 @@ import Paper from '@mui/material/Paper';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import { useAppContext } from "../../../appContext";
+
 
 const CostumeAutocomplete = styled(Autocomplete)(({ theme }) => ({
   "& .MuiInputBase-root": {
@@ -51,6 +53,7 @@ export default function Asynchronous(props) {
   //Loading ist true, wenn in search etwas eingegeben wird
   //Sobald das Ergebnis vorhanden ist, wird lading false
   const [loading, setLoading] = React.useState(false);
+  let value = useAppContext();
 
   //<--------- State fuer die Search eingabe --------->
   function handlePaperClick(event) {
@@ -58,7 +61,7 @@ export default function Asynchronous(props) {
     if(event === "-"){
       return;
     }
-    props.setSearchContent(event);
+    value.setSearchContent(event);
   }
 
   function searchInputChanged(event) {

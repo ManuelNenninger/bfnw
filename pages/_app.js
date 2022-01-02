@@ -8,6 +8,8 @@ import theme from '../styles/theme';
 import createEmotionCache from '../src/createEmotionCache';
 import "../styles/embla.css"
 import "../styles/reactMasonryCss.css"
+import Layout from "../src/components/templates/layoutDashboardDrawer";
+import { AppWrapper } from "../src/appContext";
 
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -15,7 +17,7 @@ const clientSideEmotionCache = createEmotionCache();
 
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-
+  const {...appProps} = props
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -27,7 +29,17 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Component {...pageProps} />
+          <AppWrapper>
+            {/*Wenn die URL Route mit einem der angegebenen matched, wird das Layout (DashboardDrawer) gerendert. Ansonsten nicht*/}
+            {[`/dashboard`].includes(appProps.router.pathname) ? (
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            ):(
+                <Component {...pageProps} />
+              )
+            }
+          </AppWrapper>
       </ThemeProvider>
     </CacheProvider>
   );

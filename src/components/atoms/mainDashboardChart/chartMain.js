@@ -5,14 +5,18 @@ import Chart from "chart.js/auto";
 import dataRequestMainChart from "./dataRequestMainChart";
 import chartConfigFunction from "./mainChartConfig";
 import DataRequestPolygonIo from "./dataRequestPolygonIo";
+import { useAppContext } from "../../../appContext";
+
 
 export default function BoxSx(props) {
   let myChart;
+  let value = useAppContext();
+
 
   //<-------- ChartJs Funktion, um den Chart zu erstellen -------->
   const InitialChartJsFunction = async (event) => {
     //Hie wird die Data angefordert. Da auf die Daten gewartet werden muss, ist hier eine await funktion.
-    const { dataValueArray, dataKeyArray, metaData } = await DataRequestPolygonIo({weekdaySelection: props.weekdaySelection, searchContent: props.searchContent});
+    const { dataValueArray, dataKeyArray, metaData } = await DataRequestPolygonIo({weekdaySelection: props.weekdaySelection, searchContent: value.searchContent});
 
     //Hie wird die Config des Charts angefordert. Übergeben wird dabei die Werte der Response
     let { chartConfig } = chartConfigFunction(
@@ -44,7 +48,7 @@ export default function BoxSx(props) {
       // console.log("Hier wird der aktuelle chart zerstört: " + myChart);
       myChart.destroy();
     };
-  }, [props.weekdaySelection, props.searchContent]);
+  }, [props.weekdaySelection, value.searchContent]);
 
   return (
     <Box

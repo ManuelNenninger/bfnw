@@ -22,7 +22,7 @@ export default function BoxSx(props) {
                     height: "100%",
                   }} >
                   <CostumeLegend setWeekdaySelection={setWeekdaySelection}/>
-                  <MainChart weekdaySelection={weekdaySelection} searchContent={props.searchContent}/>
+                  <MainChart weekdaySelection={weekdaySelection} />
             </Box>
           </Grid>
           <Grid item xs={12} md={4}>
