@@ -8,6 +8,7 @@ const theme = createTheme({
       main: '#4DA889',
       light: "#B9DFD2",
       dark: "#408C73",
+      veryLight: '#D5ECE4',
     },
     secondary: {
       main: '#ADADAD',
@@ -23,6 +24,12 @@ const theme = createTheme({
     },
     mentionsColor: {
       main: '#1DA1F2',
+    },
+    homePageButtonColor: {
+      main: '#FFFFFF'
+    },
+    backgroundTypography: {
+      main: "rgba(255,255,255, 0.5)",
     },
   },
   typography: {

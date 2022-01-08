@@ -17,7 +17,7 @@ export default function controlerinput(){
     <Box sx={{ p: 2 }}>
       <FormControl fullWidth variant="standard">
         <InputLabel id="demo-simple-select-standard-label">
-          Kategorie
+          Markt Kategorien
         </InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
@@ -27,16 +27,16 @@ export default function controlerinput(){
           sx={{ textAlign: "center" }}
         >
           <MenuItem value={10}>
-            <Typography variant="subtitle1">Default Kategorie</Typography>
+            <Typography variant="subtitle1">Meist gesuchte</Typography>
           </MenuItem>
           <MenuItem value={20}>
-            <Typography variant="subtitle1">Default Kategorie</Typography>
+            <Typography variant="subtitle1">Meist verkaufte</Typography>
           </MenuItem>
           <MenuItem value={30}>
-            <Typography variant="subtitle1">Default Kategorie</Typography>
+            <Typography variant="subtitle1">Meist gekaufte</Typography>
           </MenuItem>
           <MenuItem value={40}>
-            <Typography variant="subtitle1">Default Kategorie</Typography>
+            <Typography variant="subtitle1">Stärkster Wachstum</Typography>
           </MenuItem>
         </Select>
       </FormControl>

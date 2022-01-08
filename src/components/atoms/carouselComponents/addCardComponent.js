@@ -62,7 +62,7 @@ export default function AddCardComponent(props) {
                     component="div"
                     //color="secondary"
                   >
-                    Add Titel
+                    Titel hinzufügen
                   </Typography>
               </Grid>
             </Grid>

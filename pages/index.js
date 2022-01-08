@@ -2,14 +2,12 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
+import HomePage from "../src/components/templates/homePage"
 
 export default function Home() {
   return (
     <>
-      <h1>Hi, zum Dashboard gehts hier lang</h1>
-      <Link href="/dashboard">
-        <a>Dashboard</a>
-      </Link>
+      <HomePage/>
     </>
   )
 }

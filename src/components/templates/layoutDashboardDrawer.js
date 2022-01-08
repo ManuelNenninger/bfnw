@@ -21,6 +21,8 @@ import Typography from '@mui/material/Typography';
 import Appbar from '../organisms/appbar';
 import Link from 'next/link'
 import theme from "../../../styles/theme";
+import Tooltip from '@mui/material/Tooltip';
+
 
 const drawerWidth = 240;
 
@@ -58,21 +60,31 @@ function ResponsiveDrawer(props) {
           </ListItemIcon>
           <ListItemText primary="News" />
         </ListItem>
-        <ListItem button key="Analyse">
-          <ListItemIcon>
-            <AnalyticsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Analyse" />
-        </ListItem>
+        {/*Dieser Tooltip und span kann weg, sobald die Funktion implementiert ist*/}
+        <Tooltip title="Diese Funktion ist derzeit noch nicht verfügbar" placement="bottom-end">
+          <span>
+            <ListItem button disabled key="Analyse">
+              <ListItemIcon>
+                <AnalyticsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Analyse" />
+            </ListItem>
+          </span>
+        </Tooltip>
       </List>
       <Divider />
       <List>
-        <ListItem button key="Accout Settings">
-          <ListItemIcon>
-            <SettingsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Accout Settings" />
-        </ListItem>
+        {/*Dieser Tooltip und span kann weg, sobald die Funktion implementiert ist*/}
+        <Tooltip title="In der Demo Version ist kein Account hinterlegt" placement="bottom-end">
+          <span>
+            <ListItem button disabled key="Accout Settings">
+              <ListItemIcon>
+                <SettingsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Accout Settings" />
+            </ListItem>
+          </span>
+        </Tooltip>
       </List>
       <Divider />
       <List>

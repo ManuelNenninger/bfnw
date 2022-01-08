@@ -10,6 +10,8 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import SvgIcon from '@mui/material/SvgIcon';
+import PollRoundedIcon from '@mui/icons-material/PollRounded';
+import Tooltip from '@mui/material/Tooltip';
 
 
 
@@ -51,7 +53,7 @@ export default function BoxSx(props) {
               component="div"
               id="legend_label"
             >
-              h6. Heading
+              Titel loading...
             </Typography>
           </Grid>
         </Grid>
@@ -77,7 +79,7 @@ export default function BoxSx(props) {
                   component="div"
                   id="legend_price"
                 >
-                  h4. Heading
+                  Price loading...
                 </Typography>
               </Grid>
               <Grid item>
@@ -130,6 +132,11 @@ export default function BoxSx(props) {
           Max
         </ColorButton>
         </ButtonGroup>
+        <Tooltip title="Diese Funktion ist derzeit noch nicht verfügbar">
+          <span>
+            <Button size="small" sx={{ml: 2}} variant="outlined" startIcon={<PollRoundedIcon />} disabled>Zur Analyse</Button>
+          </span>
+        </Tooltip>
       </Box>
     </Box>
   );

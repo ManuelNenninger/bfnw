@@ -176,6 +176,7 @@ export default function Asynchronous(props) {
             {...params}
             onChange={(event) => searchInputChanged(event)}
             label="Search"
+            placeholder="Suche nach Aktien, ETF´s,..."
             InputProps={{
               ...params.InputProps,
               startAdornment: (

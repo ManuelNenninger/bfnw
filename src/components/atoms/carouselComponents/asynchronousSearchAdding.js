@@ -11,8 +11,18 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 
-
+const LightTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: theme.palette.primary.light,
+    color: 'rgba(0, 0, 0, 0.87)',
+    boxShadow: theme.shadows[1],
+    fontSize: 11,
+  },
+}));
 
 const CostumeAutocomplete = styled(Autocomplete)(({ theme }) => ({
   "& .MuiInputBase-root": {
@@ -184,6 +194,7 @@ export default function AsynchronousSearchAdding(props) {
           <TextField
           sx={{pr: 0}}
             {...params}
+            placeholder="Suche nach Titel"
             onChange={(event) => searchInputChanged(event)}
             ///label="search"
             variant="standard"
@@ -199,17 +210,19 @@ export default function AsynchronousSearchAdding(props) {
                   {loading ? (
                     <CircularProgress color="inherit" size={20} />
                   ) : <InputAdornment position="end">
-                    <IconButton color="primary" aria-label="add to Card Component" onClick={() => handleAddCardComponentClick(event)}>
-                      <AddCircleOutlineRoundedIcon />
-                      {/*<Typography
-                        sx={{pl: 0.5}}
-                        variant="button"
-                        component="span"
-                        color="primary"
-                      >
-                        add
-                      </Typography>*/}
-                    </IconButton>
+                      <LightTooltip title="Über den + Button kannst Du den ausgewählten Titel zu deinen Pins hinzufügen">
+                        <IconButton color="primary" aria-label="add to Card Component" onClick={() => handleAddCardComponentClick(event)}>
+                          <AddCircleOutlineRoundedIcon/>
+                          {/*<Typography
+                            sx={{pl: 0.5}}
+                            variant="button"
+                            component="span"
+                            color="primary"
+                          >
+                            add
+                          </Typography>*/}
+                        </IconButton>
+                    </LightTooltip>
                   </InputAdornment>}
                 </React.Fragment>
               )

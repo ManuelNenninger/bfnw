@@ -11,7 +11,7 @@ const slides = Array.from(Array(SLIDE_COUNT).keys());
 
 function MainDashboardComponents(props) {
   //const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [interestsInFocusArray, setInterestsInFocusArray] = React.useState(["OTLY"]);
+  const [interestsInFocusArray, setInterestsInFocusArray] = React.useState(["OTLY", "SQ"]);
 
 
 
