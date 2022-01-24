@@ -29,7 +29,7 @@ export default async function test(props) {
       method: 'POST'
     });
     const res = await response.json();
-    console.log(res);
+    //console.log(res);
     res.data.map(function(dataObject, index) {
       const headline = dataObject.text;
       const entitiesForText = dataObject.entities != null ? dataObject.entities : false;

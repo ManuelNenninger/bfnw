@@ -27,20 +27,20 @@ export default function BoxSx(props) {
     );
     const ctx = document.getElementById(chartId);
     myChart = new Chart(ctx, chartConfig, []);
-    console.log(
-      "Hier ist der aktuell erstellte chart, da die Response da ist: " + myChart
-    );
+    // console.log(
+    //   "Hier ist der aktuell erstellte chart, da die Response da ist: " + myChart
+    // );
   };
 
   useEffect(() => {
   InitialChartJsFunctionforCard();
-  console.log("Jetzt wird ein neuer Chart gemacht! für " + chartId);
-  console.log(
-    "hier ist der Chart undefiniert, da auf die response gewartet wird:" +
-      myChart
-  );
+  // console.log("Jetzt wird ein neuer Chart gemacht! für " + chartId);
+  // console.log(
+  //   "hier ist der Chart undefiniert, da auf die response gewartet wird:" +
+  //     myChart
+  // );
   return () => {
-    console.log("Hier wird der aktuelle chart mit id " + chartId +  " zerstört: " + myChart);
+    // console.log("Hier wird der aktuelle chart mit id " + chartId +  " zerstört: " + myChart);
     myChart.destroy();
   };
 }, []);
