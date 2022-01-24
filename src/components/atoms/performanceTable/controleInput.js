@@ -6,12 +6,12 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
-export default function controlerinput(){
-  const [Kategorie, setKategorie] = React.useState(10);
+export default function controlerinput(props){
+  let {kategorie, setKategorie} = props;
 
   const handleChange = (event) => {
     setKategorie(event.target.value);
-    console.log(Kategorie);
+    //console.log(kategorie);
   };
   return(
     <Box sx={{ p: 2 }}>
@@ -21,7 +21,7 @@ export default function controlerinput(){
         </InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
-          value={Kategorie}
+          value={kategorie}
           onChange={handleChange}
           label="Kategorie"
           sx={{ textAlign: "center" }}
