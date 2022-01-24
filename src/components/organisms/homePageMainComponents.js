@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import SectionOne from "../atoms/homePage/sectionOne";
 import SectionTwo from "../atoms/homePage/sectionTwo";
 import SectionThree from "../atoms/homePage/sectionThree";
-import SectionFour from "../atoms/homePage/SectionFour";
+import SectionFour from "../atoms/homePage/sectionFour";
 import SvgIcon from "@mui/material/SvgIcon";
 import theme from "../../../styles/theme"
 
