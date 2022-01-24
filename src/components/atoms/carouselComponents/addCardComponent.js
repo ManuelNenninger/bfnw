@@ -18,9 +18,9 @@ export default function AddCardComponent(props) {
     <Box
       sx={{
         width: "100%",
-        border: { xs: 0, md: 1 },
+        border: { xs: 0, md: 2 },
         borderRadius: 5,
-        borderColor: { md: "borderColor.main" }
+        borderColor: { md: "primary.main" }
       }}
     >
       <Box

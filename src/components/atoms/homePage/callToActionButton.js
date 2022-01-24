@@ -13,7 +13,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 export default function ButtonAppBar() {
   return (
     <Link href="/dashboard">
-      <ColorButton variant="contained" size="large" component="a">
+      <ColorButton variant="contained" size="large" component="a" sx={{py: {xs: 1.2,}, px: {xs: 4,}}} >
           Live Demo
       </ColorButton>
     </Link>

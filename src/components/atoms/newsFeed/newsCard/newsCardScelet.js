@@ -37,7 +37,7 @@ export default function MediaCard(props) {
 
 
   return (
-    <Card sx={{ maxWidth: 310, p: 1, border: 1, borderColor: "#bdbdbd" }}>
+    <Card sx={{  p: 1, border: 1, borderColor: "#bdbdbd" }}>
       <CardHeader
         avatar={iconSelection[props.articleObject.contentData.source]}
         action={

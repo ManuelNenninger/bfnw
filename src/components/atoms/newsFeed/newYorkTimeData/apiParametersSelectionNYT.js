@@ -30,9 +30,9 @@ export default async function apiParametersSelectionNYT(props) {
   //https://developer.nytimes.com/docs/articlesearch-product/1/overview
   //Such in allen artikeln (q="") und Filtere diese nach den user-Interests.
   let paramsTest1 = {
-    "q": [
-      //"finance"
-    ],
+    // "q": [
+    //   "finance",
+    // ],
     "begin_date": [
       pastDay.toString(),
     ],
@@ -42,11 +42,14 @@ export default async function apiParametersSelectionNYT(props) {
     "sort": [
       "newest",
     ],
-    "page": [
-      "5",
-    ],
+    // "page": [
+    //   "5",
+    // ],
     "fq": [
       "headline:(dogecoin krypto bitcoin eth ripple meta ipo china fet inflation btc stock stonks)"
+    ],
+    "q": [
+      //"finance",
     ],
   }
   //API endpoint für Twitter API V2
@@ -63,7 +66,7 @@ export default async function apiParametersSelectionNYT(props) {
       //<--------- Fuege alle interests-Arrays zusammen --------->
       //Je nach dem welche selectedInterest ausgewaehlt sind, werden hier andere Arrays zusammengesetzt
       userDataInterests = selectInterestArrays[selectedInterest];
-
+      //userDataInterests = ["dogecoin", "doge", "bitcoin"]
       //<--------- Gestalte den Filter-Query-String. Er ist speziell für NYT-API und beinhaltet die Ineressen des Users (userDataCryptoInterests, userDataStocksInterests, etc. ) --------->
       userDataInterests.map(function(interest, index) {
         if (index === 0) {
@@ -82,7 +85,6 @@ export default async function apiParametersSelectionNYT(props) {
     let newQueryString = await newQueryStringGenerator();
     //Für diese API muss der verknuepfungs Operator ein AND sein
     newQueryString = newQueryString.replaceAll("+", "AND");
-
     //Loesche den default filter-query (fq) und update Ihn mit dem neuen query-String.
     searchParams.delete("fq");
     searchParams.set("fq", newQueryString)

@@ -89,7 +89,14 @@ export default function ContentGridGenerator(props) {
     <>
       {
         (loading && props.bottomOfNewsFeedCounter === 0) ? (
+          <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+          >
             <CircularProgress color="inherit" size={50} />
+          </Grid>
           ) : (
           <Cards/>
         )

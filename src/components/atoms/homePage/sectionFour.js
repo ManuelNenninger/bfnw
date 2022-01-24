@@ -6,6 +6,7 @@ import TextField from "@mui/material/TextField";
 import SendIcon from "@mui/icons-material/Send";
 import CallToActionButton from "./callToActionButton";
 import Box from "@mui/material/Box";
+import EMailSubscriptionInput from "./eMailSubscriptionInput";
 import theme from "../../../../styles/theme"
 
 export default function sectionFour() {
@@ -44,30 +45,16 @@ export default function sectionFour() {
             alignItems="flex-start"
             spacing={1}
           >
-            <Grid item xs={12} sx={{ pb: 1 }}>
+            <Grid item xs={12} sx={{ pb: 2 }}>
               <CallToActionButton/>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="subtitle1" gutterBottom component="div">
-                Willst Du mitbekommen wann die App fertig ist? <br /> Du
-                bekommst als erstes mit, Dann hinterlasse uns deine Mail Adresse
+                Willst Du mitbekommen wann die App fertig ist? <br /> Dann hinterlasse uns deine Mail Adresse
               </Typography>
             </Grid>
             <Grid item xs={12} sx={{ display: "flex", alignItems: "center" }}>
-              <TextField
-                id="outlined-required"
-                label="E-Mail Adresse"
-                type="search"
-                variant="outlined"
-                fullWidth
-              />
-              <Button
-                variant="outlined"
-                sx={{ ml: 1, py: 2, minWidth: 120 }}
-                endIcon={<SendIcon />}
-              >
-                Subscribe
-              </Button>
+              <EMailSubscriptionInput/>
             </Grid>
           </Grid>
         </Grid>

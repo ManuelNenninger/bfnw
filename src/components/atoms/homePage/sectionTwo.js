@@ -19,7 +19,7 @@ const Content = [
     icon: <ForumRoundedIcon sx={{ fontSize: 40 }}/>,
     header: "2. Dein Feedback, dein Produkt",
     text:
-      "Fehlt Dir eine Funktion? Würdest Du gerne etwas hinzufügen oder verändern? Oder ist Dir sogar ein Problem aufgefallen? Sag es uns über die Feedback Funktion. Deine Meinung flißest in die App mit ein."
+      "Fehlt Dir eine Funktion? Würdest Du gerne etwas hinzufügen oder verändern? Oder ist Dir sogar ein Problem aufgefallen? Sag es uns über die Feedback Funktion. Deine Meinung fließest in die App mit ein."
   },
   {
     icon: <VpnKeyRoundedIcon sx={{ fontSize: 40 }}/>,

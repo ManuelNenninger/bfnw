@@ -168,36 +168,44 @@ export default function PrimarySearchAppBar(props) {
           <AsynchronousSearch setSearchContent={props.setSearchContent} />
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <LightTooltip title="Info">
-              <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                <Badge badgeContent={4} color="error">
-                  <InfoIcon />
-                </Badge>
-              </IconButton>
+            <LightTooltip title="In der Demo Version ist kein Account hinterlegt">
+              <span>
+                <IconButton disabled size="large" aria-label="show 4 new mails" color="inherit">
+                  <Badge badgeContent={4} color="error">
+                    <InfoIcon />
+                  </Badge>
+                </IconButton>
+              </span>
             </LightTooltip>
-            <LightTooltip title="Add">
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                <Badge badgeContent={17} color="error">
-                  <AddCircleOutlineIcon />
-                </Badge>
-              </IconButton>
+            <LightTooltip title="In der Demo Version ist kein Account hinterlegt">
+              <span>
+                <IconButton
+                  disabled
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                >
+                  <Badge badgeContent={17} color="error">
+                    <AddCircleOutlineIcon />
+                  </Badge>
+                </IconButton>
+              </span>
             </LightTooltip>
-            <LightTooltip title="Your Profil">
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
+            <LightTooltip title="In der Demo Version ist kein Account hinterlegt">
+              <span>
+                <IconButton
+                  disabled
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+              </span>
             </LightTooltip>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

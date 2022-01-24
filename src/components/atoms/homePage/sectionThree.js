@@ -13,7 +13,7 @@ const Content = [
     icon: <FeedRoundedIcon sx={{ fontSize: 50 }}/>,
     header: "Deine News, von überall",
     text:
-      "Instagram, Twitter, YouTube,... oder doch klassische Medien? Verschwende keine Zeit das Internet nach Neuigkeiten abzusuchen. Wir sammeln alle für dich relevanten Themen in einem Feed."
+      "Verschwende keine Zeit das Internet nach Neuigkeiten abzusuchen. Wir sammeln alle für dich relevanten Themen in einem Feed, sodass Du immer auf dem akutllsten Stand bist - in nur wenigen Minuten."
   },
   {
     icon: <FaceRetouchingNaturalRoundedIcon sx={{ fontSize: 50 }}/>,
@@ -23,7 +23,7 @@ const Content = [
   },
   {
     icon: <MultilineChartRoundedIcon sx={{ fontSize: 50 }}/>,
-    header: "Analyse Tools zu deiner Unterstützung",
+    header: "Tools, zu deiner Unterstützung",
     text:
       "Um dich bei deiner Analyse zu unterstützen, ermöglichen wir Dir den Zugriff auf wichtige Kennzahlen zu jeder Aktie. Über unser Analyse-Tool erhälst Du mit einem Blick alle wichtigen Daten und kannst somit deine Entscheidungen schnell und einfach treffen."
   }

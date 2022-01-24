@@ -99,7 +99,7 @@ useEffect(() => {
           />
         </Toolbar>
       </AppBar>
-      <Box id="mainNewsFeed" sx={{my: 4}}  >
+      <Box id="mainNewsFeed" sx={{my: 4,mx: "auto", maxWidth: '1600px'}}  >
         <NewsCardGenerator
           bottomOfNewsFeedCounter={bottomOfNewsFeedCounter}
           selectedInterest={selectedInterest}

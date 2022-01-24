@@ -92,7 +92,7 @@ export default function ButtonAppBar() {
       <AppBar position="fixed" color="primary">
         <Toolbar >
           <Typography variant="h4" component="div" sx={{ flexGrow: 1, color: theme.palette.homePageButtonColor.main, fontWeight: 500 }}>
-            SphereY
+            Finyon
           </Typography>
           <Box sx={{ display: { md: 'flex', xs: 'none' } }}>
           <ColorButton color="inherit" value="1" onClick={handleClickScroll}>About Us</ColorButton>

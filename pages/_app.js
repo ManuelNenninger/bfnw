@@ -31,12 +31,12 @@ export default function MyApp(props) {
         <CssBaseline />
           <AppWrapper>
             {/*Wenn die URL Route mit einem der angegebenen matched, wird das Layout (DashboardDrawer) gerendert. Ansonsten nicht*/}
-            {[`/dashboard`].includes(appProps.router.pathname) ? (
+            {[`/`].includes(appProps.router.pathname) ? (
+                <Component {...pageProps} />
+            ):(
               <Layout>
                 <Component {...pageProps} />
               </Layout>
-            ):(
-                <Component {...pageProps} />
               )
             }
           </AppWrapper>

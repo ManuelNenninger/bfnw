@@ -175,7 +175,7 @@ export default function Asynchronous(props) {
           <TextField
             {...params}
             onChange={(event) => searchInputChanged(event)}
-            label="Search"
+            //label="Search"
             placeholder="Suche nach Aktien, ETF´s,..."
             InputProps={{
               ...params.InputProps,

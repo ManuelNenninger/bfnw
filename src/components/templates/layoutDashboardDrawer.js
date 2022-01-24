@@ -22,7 +22,8 @@ import Appbar from '../organisms/appbar';
 import Link from 'next/link'
 import theme from "../../../styles/theme";
 import Tooltip from '@mui/material/Tooltip';
-
+import Button from '@mui/material/Button';
+import SubscribePopUp from "../atoms/drawerBarComponents/subscribePopUp"
 
 const drawerWidth = 240;
 
@@ -39,27 +40,33 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       <List>
-        <ListItem  key="Brand">
-          <Typography variant="h6" >SphereIO</Typography>
-        </ListItem>
+        <Link href="/">
+          <ListItem button key="Brand">
+            <Typography variant="h6" >Finyon</Typography>
+          </ListItem>
+        </Link>
         <ListItem  key="Welcome">
-          <Typography  variant="subtitle2" gutterBottom >Wilkommen zur Beta Version 1</Typography>
+          <Typography  variant="subtitle2" gutterBottom >Wilkommen zur Beta Version </Typography>
         </ListItem>
       </List>
       <Divider />
       <List>
-        <ListItem button key="Dashboard">
-          <ListItemIcon>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText primary="Dashboard" />
-        </ListItem>
-        <ListItem button key="Dashboard">
-          <ListItemIcon>
-            <ShowChartIcon />
-          </ListItemIcon>
-          <ListItemText primary="News" />
-        </ListItem>
+        <Link href="/dashboard">
+          <ListItem button component="a" key="Dashboard">
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
+        </Link>
+          <Link href="/news">
+          <ListItem button key="News">
+            <ListItemIcon>
+              <ShowChartIcon />
+            </ListItemIcon>
+            <ListItemText primary="News" />
+          </ListItem>
+        </Link>
         {/*Dieser Tooltip und span kann weg, sobald die Funktion implementiert ist*/}
         <Tooltip title="Diese Funktion ist derzeit noch nicht verfügbar" placement="bottom-end">
           <span>
@@ -88,13 +95,22 @@ function ResponsiveDrawer(props) {
       </List>
       <Divider />
       <List>
-        <ListItem button key="Feedback" sx={{backgroundColor: theme.palette.primary.main, '&:hover, &:focus':{bgcolor: theme.palette.primary.light}}} >
-          <ListItemIcon>
+      <Link href="/feedback">
+        <ListItem button component="a" key="Feedback" sx={{ '&:hover, &:focus':{bgcolor: "inherit"}}}>
+        <Button fullWidth variant="contained" sx={{backgroundColor: theme.palette.primary.main, boxShadow: 3, '&:hover, &:focus':{bgcolor: theme.palette.primary.light}}}>Was können wir verbessern?</Button>
+          {/*<ListItemIcon>
             <FeedbackIcon />
           </ListItemIcon>
           <ListItemText>
             <Typography  variant="subtitle1" gutterBottom >Was können wir verbessern?</Typography>
-          </ListItemText>
+          </ListItemText>*/}
+        </ListItem>
+          </Link>
+      </List>
+      <Divider />
+      <List>
+        <ListItem button key="SubscribePopUp" fullWidth sx={{ '&:hover, &:focus':{bgcolor: "inherit"}}}>
+          <SubscribePopUp/>
         </ListItem>
       </List>
     </div>
