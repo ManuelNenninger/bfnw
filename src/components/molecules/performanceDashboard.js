@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import MainChart from "../atoms/mainDashboardChart/chartMain";
 import CostumeLegend from "../atoms/mainDashboardChart/customLegend";
-import PerformanceTable from "./PerformanceTable";
+import PerformanceTable from "./performanceTable";
 
 export default function BoxSx(props) {
   const [weekdaySelection, setWeekdaySelection] = useState("week");
