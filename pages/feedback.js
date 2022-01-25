@@ -1,10 +1,9 @@
-import Toolbar from '@mui/material/Toolbar';
+import FeedBackInvolve from "../src/components/templates/feedbackInvolve"
 
 export default function Dashboard() {
   return (
     <>
-    <Toolbar />
-    <h1>Feedback Page</h1>
+      <FeedBackInvolve/>
     </>
   )
 }
