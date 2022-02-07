@@ -75,12 +75,13 @@ export default function AsynchronousSearchAdding(props) {
 
   function handleAddCardComponentClick(event){
     //Wenn kein Suchergebis vorliegt aber dennoch auf die Auswahl geklickt wird, wird nichts durchgefuehrt
-    if(event === ""){
+    if(selectedTicker === ""){
       return;
     }
     console.log("Der ausgewählte Ticker ist: " + selectedTicker);
     setInterestsInFocusArray((prev) => [...prev, selectedTicker]);
     setSelectedTicker("");
+    setSearchInput("");
   }
 
   function searchInputChanged(event) {
@@ -141,6 +142,7 @@ export default function AsynchronousSearchAdding(props) {
     <Search>
       <CostumeAutocomplete
         filterOptions={(options) => options}
+        inputValue={searchInput}
         id="asynchronous-demo"
         sx={{minWidth: 200 }}
         open={open}
@@ -200,6 +202,7 @@ export default function AsynchronousSearchAdding(props) {
             variant="standard"
             InputProps={{
               ...params.InputProps,
+
               startAdornment: (
                 <InputAdornment position="start">
                   <SearchIcon />

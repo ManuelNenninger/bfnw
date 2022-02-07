@@ -3,7 +3,6 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import ConvinceCard from "./convinceCard";
 import FeedRoundedIcon from '@mui/icons-material/FeedRounded';
-import PersonPinCircleRoundedIcon from '@mui/icons-material/PersonPinCircleRounded';
 import MultilineChartRoundedIcon from '@mui/icons-material/MultilineChartRounded';
 import FaceRetouchingNaturalRoundedIcon from '@mui/icons-material/FaceRetouchingNaturalRounded';
 import Box from "@mui/material/Box";

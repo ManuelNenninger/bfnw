@@ -1,23 +1,13 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import CallToActionButton from "./callToActionButton";
 import SendIcon from '@mui/icons-material/Send';
 import EMailSubscriptionInput from "./eMailSubscriptionInput";
 import Image from 'next/image'
 
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary
-}));
+
 
 export default function AutoGrid() {
   return (
@@ -62,45 +52,6 @@ export default function AutoGrid() {
         <Grid item xs={12} sm={6}>
           <Image src="/landingPageImageTwo.png" alt="raster_preview" width={1630} height={1300} loading="eager" layout="responsive" />
           {/*<Image src="/landingPageImageThree.png" alt="raster_preview" width={6912} height={3456} loading="eager" layout="responsive" />*/}
-          {/*<Grid
-            container
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-            spacing={3}
-          >
-            <Grid item>
-              <Box
-                sx={{
-                  height: 500,
-                  width: 200,
-                  backgroundColor: "primary.dark",
-                  borderRadius: 5
-                }}
-              />
-            </Grid>
-            <Grid item>
-              <Box
-                sx={{
-                  height: 500,
-                  width: 200,
-                  backgroundColor: "primary.dark",
-                  borderRadius: 5,
-                  mt: 5
-                }}
-              />
-            </Grid>
-            <Grid item>
-              <Box
-                sx={{
-                  height: 500,
-                  width: 200,
-                  backgroundColor: "primary.dark",
-                  borderRadius: 5
-                }}
-              />
-            </Grid>
-          </Grid>*/}
         </Grid>
       </Grid>
   );

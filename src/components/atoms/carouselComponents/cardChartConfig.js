@@ -35,7 +35,7 @@ export default function cardChartConfig(dataValueArray, dataKeyArray, metaData, 
 
   const relativeChardColor = {
       id: "relativeChardColor",
-      beforeDraw: (chart) => {
+      afterInit: (chart) => {
         //<-------- Zuweisung der Werte an die Costume Legend der Card -------->
         const legendLabel = document.getElementById("Typography_SlideIndex_" + slideIndex + "_RowIndex_0");
         const relativeReturnLabel = document.getElementById("Typography_SlideIndex_" + slideIndex + "_RowIndex_1");
@@ -44,9 +44,9 @@ export default function cardChartConfig(dataValueArray, dataKeyArray, metaData, 
         const relativeReturnIconArrowDropUpIcon = document.getElementById("Relative_Return_ArrowDropUpIcon_SlideIndex_" +  slideIndex);
 
 
-        legendLabel.innerHTML = metaData;
+        legendLabel.innerHTML = metaData.ticker;
         relativeReturnLabel.innerHTML = RelativeReturnCalc(dataValueArray[0],dataValueArray[dataValueArray.length - 1]) + "%";
-        priceLabel.innerHTML = dataValueArray[dataValueArray.length - 1];
+        priceLabel.innerHTML = (dataValueArray[dataValueArray.length - 1]).toFixed(3);
 
         //<-------------- Setze fest, ob der initial chart green or red ist -------------->
         if (dataValueArray[0] >= dataValueArray[dataValueArray.length - 1]) {

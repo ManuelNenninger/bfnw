@@ -11,7 +11,9 @@ export default function PerformanceTable(props) {
         kategorie={kategorie}
         setKategorie={setKategorie}
        />
-      <CostumeTableContainer/>
+      <CostumeTableContainer
+        kategorie={kategorie}
+        setKategorie={setKategorie}/>
     </>
   );
 }

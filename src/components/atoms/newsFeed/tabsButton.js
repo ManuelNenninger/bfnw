@@ -12,6 +12,8 @@ import DeviceHubIcon from "@mui/icons-material/DeviceHub";
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import FormatListBulletedRoundedIcon from '@mui/icons-material/FormatListBulletedRounded';
 import theme from "../../../../styles/theme";
+import Tooltip from '@mui/material/Tooltip';
+
 
 export default function ScrollableTabsButtonAuto(props) {
   const [valueOne, setValueOne] = React.useState(0);
@@ -45,7 +47,11 @@ export default function ScrollableTabsButtonAuto(props) {
             aria-label="scrollable auto tabs example"
           >
             <Tab icon={<PersonPinIcon />} label="Market News" />
-            <Tab icon={<PublicIcon />} disabled label="Personal News" />
+            <Tooltip title="Diese Funktion ist derzeit noch nicht verfügbar" placement="bottom">
+              <span>
+                <Tab icon={<PublicIcon />} disabled label="Personal News" />
+              </span>
+            </Tooltip>
           </Tabs>
         </Grid>
         <Grid item xs="auto" sx={{ borderRight: 1, borderColor: theme.palette.borderColor.dark }} zeroMinWidth>
@@ -62,7 +68,7 @@ export default function ScrollableTabsButtonAuto(props) {
             <Tab icon={<AccountBalanceIcon />} label="Alle Themen" />
             <Tab icon={<ShowChartIcon />} label="Aktien" />
             <Tab icon={<DeviceHubIcon />} label="Crypto" />
-            <Tab icon={<HomeWorkIcon />} label="Allgemein" />
+            <Tab icon={<HomeWorkIcon />} label="Börse generell" />
           </Tabs>
         </Grid>
         <Grid item xs zeroMinWidth>
@@ -77,7 +83,11 @@ export default function ScrollableTabsButtonAuto(props) {
             aria-label="News Feed Ansicht"
           >
             <Tab icon={<DashboardRoundedIcon />} label="Card" />
-            <Tab icon={<FormatListBulletedRoundedIcon />} label="List" disabled />
+            <Tooltip title="Diese Funktion ist derzeit noch nicht verfügbar" placement="bottom">
+              <span>
+                <Tab icon={<FormatListBulletedRoundedIcon />} label="List" disabled />
+              </span>
+            </Tooltip>
           </Tabs>
         </Grid>
       </Grid>

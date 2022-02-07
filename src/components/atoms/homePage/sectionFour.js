@@ -1,13 +1,9 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import SendIcon from "@mui/icons-material/Send";
 import CallToActionButton from "./callToActionButton";
 import Box from "@mui/material/Box";
 import EMailSubscriptionInput from "./eMailSubscriptionInput";
-import theme from "../../../../styles/theme"
 
 export default function sectionFour() {
   return (
@@ -20,23 +16,27 @@ export default function sectionFour() {
       >
         <Grid item xs={12} md={5}>
         <Box sx={{ borderBottom: 2}} >
-          <Typography sx={{py: 1, backgroundColor: "rgba(255,255,255, 0.5)",}} variant="h3" gutterBottom component="div">
+          <Typography sx={{py: 1, backgroundColor: "rgba(255,255,255, 0.5)",}} gutterBottom variant="h3"  component="div">
             About
           </Typography>
-          </Box>
-          <Typography sx={{pt: 2}} variant="subtitle1" gutterBottom component="div">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanctus est Lorem ipsum dolor sit loll.
+        </Box>
+        <Typography sx={{pt: 2, fontWeight: 400}} variant="h6"  component="div">
+          Hi, ich bin Manuel und ich will Dir dabei helfen, ein besserer Investor zu werden.
+        </Typography>
+        <Typography sx={{pt: 4, fontWeight: 300}} variant="subtitle1"  component="div">
+          In der Welt der Finanzen geschehen viele Ereignisse - rund um die Uhr. Viele davon beeinflussen auch deine Investment Entscheidungen, wobei es schwer ist, sich immer auf dem Laufenden zu halten. Das ist zumindest mein Problem – gewesen.
+        </Typography>
+        <Typography sx={{pt: 2, fontWeight: 300}}  variant="subtitle1"  component="div">
+          <Typography sx={{pt: 2, fontWeight: 400,}}  variant="subtitle1"  component="span">
+            Finyon soll dir dabei helfen, dich immer über die aktuellen Themen zu informieren, welche für dich als Anleger relevant sein könnten.
           </Typography>
+          Egal ob Du jeden Tag an der Börse handelst, passiv investierst oder dich einfach nur über die Finanzwelt und ihre Ereignisse interessierst.
+        </Typography>
+        <Typography sx={{pt: 2, fontWeight: 300}}  variant="subtitle1" gutterBottom component="div">
+          Diese Web-App ist ein der Prototyp. Falls Du dir eine vollumfängliche Webversion wünscht – mit allen Funktionen – hinterlasse mir deine Mail.
+          Oder teile deine Meinung über die Feedback Funktion, damit ich das Produkt so gestalten kann, dass es Dich auch wirklich unterstützt.
+        </Typography>
         </Grid>
-
         <Grid item xs={12} md={7}>
           <Grid
             container

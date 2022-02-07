@@ -4,7 +4,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import MarkEmailReadRoundedIcon from "@mui/icons-material/MarkEmailReadRounded";
-import Box from '@mui/material/Box';
 
 export default function CheckboxLabels() {
   return (

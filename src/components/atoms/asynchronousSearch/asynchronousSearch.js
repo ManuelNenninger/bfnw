@@ -62,6 +62,7 @@ export default function Asynchronous(props) {
       return;
     }
     value.setSearchContent(event);
+    setSearchInput("")
   }
 
   function searchInputChanged(event) {
@@ -122,6 +123,7 @@ export default function Asynchronous(props) {
     <Search>
       <CostumeAutocomplete
         filterOptions={(options) => options}
+        inputValue={searchInput}
         id="asynchronous-demo"
         sx={{ width: 300 }}
         open={open}

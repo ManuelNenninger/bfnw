@@ -70,7 +70,6 @@ export default function RecipeReviewCard(props) {
   // }, []);
 
   function handleCardClick(event){
-    console.log("Ich wurde geklickt: ");
     console.log(tickerForCard);
     value.setSearchContent(tickerForCard);
   }

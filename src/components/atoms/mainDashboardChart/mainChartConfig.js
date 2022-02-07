@@ -42,7 +42,7 @@ export default function mainChartConfig(dataValueArray, dataKeyArray, metaData, 
       ctx.save();
 
       //draw line
-      ctx.strokeStyle = theme.palette.borderColor.main;
+      ctx.strokeStyle = theme.palette.borderColor.dark;
       //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash
       ctx.setLineDash([10, 20]);
       ctx.strokeRect(left, y.getPixelForValue(dataValueArray[0]), width, 0);
@@ -79,15 +79,15 @@ export default function mainChartConfig(dataValueArray, dataKeyArray, metaData, 
   }
 };
 
-//<-------------- PlugIn fuer den custom Legend. Hier werden die ausgewählten Datenpoints in das hTML Legend uebertragen -------------->
-const costumeLegend = {
+//<-------------- PlugIn fuer den custom Legend. Zuweisen der initialen Werte -------------->
+const costumeLegendInitial = {
     id: "costumeLegend",
-    beforeDraw: (chart) => {
+    afterInit: (chart) => {
       const priceLabel = document.getElementById("legend_price");
       const legendLabel = document.getElementById("legend_label");
       const relativeReturnLabel = document.getElementById("relative_returne");
       //Initiales zuweisen des Costume Legend
-      legendLabel.innerHTML = metaData;
+      legendLabel.innerHTML = metaData.companyName;
       relativeReturnLabel.innerHTML = RelativeReturnCalc(dataValueArray[0],dataValueArray[dataValueArray.length - 1]);
 
       //Setze fest, ob der initial chart green or red ist
@@ -102,6 +102,15 @@ const costumeLegend = {
         chart.update();
         document.getElementById("relative_returne_Box").style.backgroundColor = theme.palette.primary.dark;
       }
+    }};
+
+//<-------------- PlugIn fuer den custom Legend. Hier werden die ausgewählten Datenpoints in das hTML Legend uebertragen -------------->
+const costumeLegend = {
+    id: "costumeLegend",
+    beforeDraw: (chart) => {
+      const priceLabel = document.getElementById("legend_price");
+      const legendLabel = document.getElementById("legend_label");
+      const relativeReturnLabel = document.getElementById("relative_returne");
 
       //Wenn Du über einen Datenpoint bist oder dieser aktiv wird das -active array gesetzt, und die Hoover Daten gespeichert.
       if (chart.tooltip._active && chart.tooltip._active.length) {
@@ -123,7 +132,8 @@ const costumeLegend = {
         priceLabel.innerHTML = chart.tooltip.dataPoints[0].formattedValue;
         //Hier wird dem Label relative_Return der Wert zugewiesen. Davor allerdings berechnet.
         relativeReturnLabel.innerHTML = RelativeReturnCalc(dataValueArray[0], chart.tooltip.dataPoints[0].raw);
-      } else {
+      }
+      else {
         priceLabel.innerHTML = dataValueArray[dataValueArray.length - 1];
       }
     }
@@ -178,7 +188,7 @@ const footerPrice = (tooltipItems) => {
           }
         ]
       },
-      plugins: [horizontalDottedLine, tooltipline, costumeLegend],
+      plugins: [horizontalDottedLine, tooltipline, costumeLegend, costumeLegendInitial],
       options: {
         plugins: {
           tooltip: {

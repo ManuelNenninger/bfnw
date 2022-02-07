@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect, useRef } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,6 +12,8 @@ import SvgIcon from "@mui/material/SvgIcon";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { styled } from '@mui/material/styles';
+import DataRequestSnapshotPolygonIo from "./dataRequestSnapshotPolygonIo";
+import { useAppContext } from "../../../appContext";
 
 const StyledPaper = styled(Paper)({
   boxShadow: 'none',
@@ -22,34 +25,76 @@ const StyledPaper = styled(Paper)({
 //   backgroundColor: theme.palette.primary.main,
 // }));
 
+//Hinweis: TickerSymbol wird hier nicht hinzugefuegt, da es in der Tabelle nicht gerendert wird!
 const columns = [
   { id: "icon", label: "Asset", width: 0, align: "left" },
   { id: "assetName", label: "", align: "left" },
   {
-    id: "info",
-    label: "Info",
-    minWidth: 200,
+    id: "closePrice",
+    label: "Last Price ($)",
+
+    align: "right",
+    format: (value) => <SvgIcon component={value} />
+  },
+  {
+    id: "interest",
+    label: "Interest (%)",
+    //minWidth: 10,
     align: "right",
     format: (value) => <SvgIcon component={value} />
   }
 ];
 
-function createData(icon, assetName, info) {
-  return { icon, assetName, info };
-}
+// function createData(icon, assetName, closePrice, interest) {
+//   return { icon, assetName, closePrice, interest };
+// }
 
-const rows = [
-  createData("FacebookIcon", "Apple", 3287263),
-  createData("FacebookIcon", "Apple", 3287263),
-  createData("FacebookIcon", "Apple", 3287263),
-  createData("FacebookIcon", "Apple", 3287263),
-  createData("FacebookIcon", "Apple", 3287263),
-  createData("FacebookIcon", "Apple", 3287263),
-  createData("FacebookIcon", "Apple", 3287263),
-  createData("FacebookIcon", "Apple", 3287263)
-];
+// const rows = [
+//   createData("FacebookIcon", "Apple", 3287263),
+//   createData("FacebookIcon", "Apple", 3287263),
+//   createData("FacebookIcon", "Apple", 3287263),
+//   createData("FacebookIcon", "Apple", 3287263),
+//   createData("FacebookIcon", "Apple", 3287263),
+//   createData("FacebookIcon", "Apple", 3287263),
+//   createData("FacebookIcon", "Apple", 3287263),
+//   createData("FacebookIcon", "Apple", 3287263)
+// ];
 
-export default function StickyHeadTable() {
+
+export default function StickyHeadTable(props) {
+  const [rows, setRows] = React.useState([]);
+  let {kategorie, setKategorie} = props;
+  let value = useAppContext();
+
+  function handleClick(event){
+    value.setSearchContent(event)
+  }
+
+  const InitialSnapshotRequest = async (event) => {
+    let snapshotArray = await DataRequestSnapshotPolygonIo(kategorie);
+    setRows(snapshotArray)
+  };
+
+  useEffect(() => {
+  InitialSnapshotRequest();
+
+  // (async function(){
+  //   const response = await fetch(`api/tickerMapRequestPolygonIo`, {
+  //         body: JSON.stringify(
+  //           "nix"
+  //         ),
+  //         headers: {
+  //           'Content-Type': 'application/json'
+  //         },
+  //         method: 'POST'
+  //       }
+  //     );
+  //     const res = await response.json();
+  //     console.log(res);
+  // })();
+
+  }, [kategorie]);
+
   return(
     <StyledPaper sx={{ width: "100%", overflow: "hidden", }}>
       <TableContainer sx={{ maxHeight: 420 }}>
@@ -75,6 +120,7 @@ export default function StickyHeadTable() {
                     const value = row[column.id];
                     return (
                       <TableCell
+                        onClick={() => handleClick(row.tickerSymbol)}
                         key={column.id}
                         align={column.align}
                         width={column.width}

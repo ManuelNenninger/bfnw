@@ -27,17 +27,17 @@ export default function controlerinput(props){
           sx={{ textAlign: "center" }}
         >
           <MenuItem value={10}>
-            <Typography variant="subtitle1">Meist gesuchte</Typography>
+            <Typography variant="subtitle1">Top-Gewinner</Typography>
           </MenuItem>
           <MenuItem value={20}>
-            <Typography variant="subtitle1">Meist verkaufte</Typography>
+            <Typography variant="subtitle1">Top-Verlierer</Typography>
           </MenuItem>
-          <MenuItem value={30}>
+        {/*<MenuItem value={30}>
             <Typography variant="subtitle1">Meist gekaufte</Typography>
           </MenuItem>
           <MenuItem value={40}>
             <Typography variant="subtitle1">Stärkster Wachstum</Typography>
-          </MenuItem>
+          </MenuItem>*/}
         </Select>
       </FormControl>
     </Box>
