@@ -1,8 +1,6 @@
 import * as React from 'react';
-import { useEffect, useRef } from "react";
-import Box from '@mui/material/Box';
+import { useEffect } from "react";
 import Chart from "chart.js/auto";
-import dataRequestCardChart from "../mainDashboardChart/dataRequestMainChart";
 import cardChartConfigFunction from "./cardChartConfig";
 import DataRequestPolygonIo from "../mainDashboardChart/dataRequestPolygonIo";
 

@@ -43,7 +43,7 @@ let responseRows = []
         }
       );
     const res = await response.json();
-
+    
     responseRows = await Promise.all(res.tickers.map(async function(ticker, index){
       let companyName = await companyNameRequest(ticker)
       return createData("FacebookIcon", companyName, ticker.day.c.toFixed(3), ticker.todaysChangePerc.toFixed(3), ticker.ticker);

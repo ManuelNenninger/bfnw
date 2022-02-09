@@ -1,7 +1,4 @@
-import * as React from "react";
-import Chart from "chart.js/auto";
 import RelativeReturnCalc from "../../calc/relativeReturne";
-import Tooltipline from "../chartPlugIns/tooltipline";
 import theme from '../../../../styles/theme';
 
 

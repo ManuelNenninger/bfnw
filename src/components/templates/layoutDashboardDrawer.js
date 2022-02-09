@@ -15,7 +15,6 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
-import FeedbackIcon from '@mui/icons-material/Feedback';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Appbar from '../organisms/appbar';
@@ -98,12 +97,6 @@ function ResponsiveDrawer(props) {
       <Link href="/feedback">
         <ListItem button component="a" key="Feedback" sx={{ '&:hover, &:focus':{bgcolor: "inherit"}}}>
         <Button fullWidth variant="contained" sx={{backgroundColor: theme.palette.primary.main, boxShadow: 3, '&:hover, &:focus':{bgcolor: theme.palette.primary.light}}}>Was können wir verbessern?</Button>
-          {/*<ListItemIcon>
-            <FeedbackIcon />
-          </ListItemIcon>
-          <ListItemText>
-            <Typography  variant="subtitle1" gutterBottom >Was können wir verbessern?</Typography>
-          </ListItemText>*/}
         </ListItem>
           </Link>
       </List>

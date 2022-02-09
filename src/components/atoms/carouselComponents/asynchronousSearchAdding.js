@@ -78,7 +78,7 @@ export default function AsynchronousSearchAdding(props) {
     if(selectedTicker === ""){
       return;
     }
-    console.log("Der ausgewählte Ticker ist: " + selectedTicker);
+    //console.log("Der ausgewählte Ticker ist: " + selectedTicker);
     setInterestsInFocusArray((prev) => [...prev, selectedTicker]);
     setSelectedTicker("");
     setSearchInput("");

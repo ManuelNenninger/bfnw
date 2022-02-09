@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,7 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import AppleIcon from "@mui/icons-material/Apple";
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import SvgIcon from "@mui/material/SvgIcon";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -129,7 +129,7 @@ export default function StickyHeadTable(props) {
                         {/*{column.format && typeof value === "string"
                         ? column.format(value)
                         : value}*/}
-                        {column.id === "icon" ? <AppleIcon /> : value}
+                        {column.id === "icon" ? <FiberManualRecordIcon /> : value}
                       </TableCell>
                     );
                   })}

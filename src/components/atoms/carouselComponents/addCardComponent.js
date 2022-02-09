@@ -1,12 +1,8 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Input from "@mui/material/Input";
-import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
-import InputAdornment from "@mui/material/InputAdornment";
 import ArrowRightRoundedIcon from "@mui/icons-material/ArrowRightRounded";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import AsynchronousSearchAdding from "./asynchronousSearchAdding";
 import BookmarkAddRoundedIcon from '@mui/icons-material/BookmarkAddRounded';
@@ -49,9 +45,6 @@ export default function AddCardComponent(props) {
             justifyContent="center"
             alignItems="center"
             >
-              {/*<IconButton color="primary" aria-label="add to shopping cart">
-                  <AddCircleOutlineRoundedIcon sx={{ fontSize: 50 }} />
-                </IconButton>*/}
                 <Grid item>
                   <BookmarkAddRoundedIcon/>
                 </Grid>
@@ -69,43 +62,7 @@ export default function AddCardComponent(props) {
           </Grid>
           <Grid item >
             <AsynchronousSearchAdding {...props} />
-            {/*<Input
-              placeholder="Füge einen Titel hinzu"
-              inputProps={ariaLabel}
-              //fullWidth
-              startAdornment={
-                <InputAdornment position="start">
-                  <ArrowRightRoundedIcon />
-                </InputAdornment>
-              }
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton color="primary" aria-label="add to shopping cart">
-                    <AddCircleOutlineRoundedIcon />
-                    <Typography
-                      sx={{pl: 0.5}}
-                      variant="button"
-                      component="span"
-                      color="primary"
-                    >
-                      add
-                    </Typography>
-                  </IconButton>
-                </InputAdornment>
-              }
-            />*/}
           </Grid>
-          {/*<Grid item sx={{ minWidth: "70%" }}>
-            <Button
-            size="small"
-              fullWidth
-              variant="contained"
-              color="primary"
-              startIcon={<AddCircleOutlineRoundedIcon />}
-            >
-              Add
-            </Button>
-          </Grid>*/}
         </Grid>
       </Box>
     </Box>

@@ -9,7 +9,7 @@ export default async function returnUserInterests (object){
   //let userDataInterestsInFocus = ["AAPL, GME", "OTLY",]
   let userDataCryptoInterests = ["dogecoin", "doge", "bitcoin", "ethereum", "eth", "ripple", "btc", "coin", "Krypto",]
   let userDataStocksInterests = ["stocks", "stonks", "aktien", "apple", "tesla", "gme", "gamestop", "oatly", "square", "facebook",]
-  let userDataGeneralInterests = ["inflation", "ezb", "fet", "rendite", "feature", "meta", "dividende", "ipo", "msci", "china", "sparen", "steuer", "tax", "wohnungsmarkt", "Zinsen", "interest", "(interest + rates)", "(housing + market)",]
+  let userDataGeneralInterests = ["inflation", "ezb", "fet", "rendite", "feature", "meta", "dividende", "ipo", "msci", "(china + market)", "sparen", "steuer", "tax", "wohnungsmarkt", "Zinsen", "interest", "(interest + rates)", "(housing + market)",]
   let personsOfInterest = ["elonmusk", "finanzfluss", "talerbox", "AlleAktien", "aktiengram", "justETF", "RayDalio",]
 
   if(object){

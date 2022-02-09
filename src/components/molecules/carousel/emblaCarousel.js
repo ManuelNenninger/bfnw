@@ -3,7 +3,6 @@ import { PrevButton, NextButton } from "../../atoms/carouselComponents/emblaCaro
 import useEmblaCarousel from "embla-carousel-react";
 import CarouselCard from "./cardCarousel";
 import AddCardComponent from "../../atoms/carouselComponents/addCardComponent";
-import PersonalUserInterests from "../../userData/personalUserInterests";
 
 const EmblaCarousel = (props) => {
   const [viewportRef, embla] = useEmblaCarousel({

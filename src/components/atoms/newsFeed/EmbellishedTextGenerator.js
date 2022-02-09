@@ -1,8 +1,5 @@
 import * as React from "react";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import Button from '@mui/material/Button';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Link from '@mui/material/Link';
 import theme from "../../../../styles/theme";

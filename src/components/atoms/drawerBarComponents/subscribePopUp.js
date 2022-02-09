@@ -7,7 +7,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
-import Link from 'next/link'
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
@@ -48,9 +47,6 @@ export default function FormDialog() {
           />
         </DialogContent>
         <DialogActions>
-          {/*<Link href="/feedback">
-            <Button component="a" onClick={handleClose}>Feedback</Button>
-          </Link>*/}
           <Button onClick={handleClose}>Cancel</Button>
           <Box value="" name="b_0e0ae2dacd97de1468fbc0eec_8962cf87da">
             <Button onClick={handleClose} type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe">Subscribe</Button>

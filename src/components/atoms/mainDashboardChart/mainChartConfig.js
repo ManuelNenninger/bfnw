@@ -1,5 +1,3 @@
-import * as React from "react";
-import Chart from "chart.js/auto";
 import RelativeReturnCalc from "../../calc/relativeReturne";
 import theme from '../../../../styles/theme';
 

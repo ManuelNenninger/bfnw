@@ -1,9 +1,4 @@
 import * as React from 'react';
-import { useEffect, useRef } from "react";
-import {
-  styled,
-  createTheme
-} from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -14,13 +9,10 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import SvgIcon from '@mui/material/SvgIcon';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import MobileCardCarousel from "../../atoms/carouselComponents/mobileCardCarousel";
 import ChartCarouselCard from "../../atoms/carouselComponents/chartCarouselCard";
 import theme from '../../../../styles/theme';
-import DataRequestPolygonIo from "../../atoms/mainDashboardChart/dataRequestPolygonIo";
 import { useAppContext } from "../../../appContext";
 
-const mobile = MobileCardCarousel;
 
 
 const ArrayContent = [
@@ -44,30 +36,6 @@ const ArrayContent = [
 export default function RecipeReviewCard(props) {
   let { tickerForCard } = props
   let value = useAppContext();
-
-
-  //Hier sind die Standart Ticker für den Carousel. Spaeter ersetzen.
-  const carouselCardTickerSelection = {
-    "0": "OTLY",
-    "1": "GME",
-    "2": "TSLA",
-    "3": "AAPL",
-    "4": "SA",
-  };
-
-
-
-
-  //<-------- ChartJs Funktion, um den Chart zu erstellen -------->
-  // const InitialDataRequestForChardforCard = async (event) => {
-  //   //Hie wird die Data angefordert. Da auf die Daten gewartet werden muss, ist hier eine await funktion.
-  //    const { dataValueArray, dataKeyArray, metaData } = await DataRequestPolygonIo({weekdaySelection: "week", searchContent: carouselCardTickerSelection[props.slideIndex]});
-  //    dataValue = dataValueArray;
-  // };
-  //
-  // useEffect(() => {
-  // InitialDataRequestForChardforCard();
-  // }, []);
 
   function handleCardClick(event){
     console.log(tickerForCard);
