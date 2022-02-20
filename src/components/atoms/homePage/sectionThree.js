@@ -12,19 +12,19 @@ const Content = [
     icon: <FeedRoundedIcon sx={{ fontSize: 50 }}/>,
     header: "Deine News, von überall",
     text:
-      "Verschwende keine Zeit das Internet nach Neuigkeiten abzusuchen. Wir sammeln alle für dich relevanten Themen in einem Feed, sodass Du immer auf dem akutllsten Stand bist - in nur wenigen Minuten."
+      "Wühl dich nicht durch Twitter, YouTube oder das gesamte Internet. Wir sammeln alle deine wichtigsten Themen. In einem Feed, sodass Du immer auf dem aktuellsten Stand bist - in nur wenigen Minuten."
   },
   {
     icon: <FaceRetouchingNaturalRoundedIcon sx={{ fontSize: 50 }}/>,
     header: "Auf dich angepasst",
     text:
-      "Um deine Zeit nicht mit unnötigen Themen zu verschwenden, zeigen wir nur was dich auch interresiert. Du kannst den Inhalt des Dashboards auf dich anpassen, wie Du es möchtest."
+      "Um deine Zeit nicht mit unnötigen Themen zu verschwenden, zeigen wir nur was dich auch interessiert. Du kannst den Inhalt des Dashboards auf dich anpassen, wie Du es möchtest."
   },
   {
     icon: <MultilineChartRoundedIcon sx={{ fontSize: 50 }}/>,
     header: "Tools, zu deiner Unterstützung",
     text:
-      "Um dich bei deiner Analyse zu unterstützen, ermöglichen wir Dir den Zugriff auf wichtige Kennzahlen zu jeder Aktie. Über unser Analyse-Tool erhälst Du mit einem Blick alle wichtigen Daten und kannst somit deine Entscheidungen schnell und einfach treffen."
+      "Um dich bei deiner Analyse zu unterstützen, ermöglichen wir Dir den Zugriff auf wichtige Kennzahlen zu jeder Aktie. Über unser Analyse-Tool erhältst Du mit einem Blick alle wichtigen Daten und kannst somit deine Entscheidungen schnell und einfach treffen."
   }
 ];
 

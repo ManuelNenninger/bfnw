@@ -136,6 +136,7 @@ export default function Asynchronous(props) {
         //isOptionEqualToValue vergleicht nochmal das, was Du eingegeben hast mit dem Ergebnis-Array (options)
         //isOptionEqualToValue={(option, value) => (option.name === value.title)}
         getOptionLabel={(option) => option.name}
+        noOptionsText="Suche nach Aktien, ETF´s,..."
         options={options}
         loading={loading}
         PaperComponent={CostumePaper}

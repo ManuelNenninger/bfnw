@@ -52,13 +52,15 @@ const Search = styled("div")(({ theme }) => ({
   },
 }));
 
-
+//Hinweis: Der Fehler: The value provided to Autocomplete is invalid. kommt daher, dass der "Value" ein Object, statt ein Wert ist
+//Du muesstest also Value in Autocomplete vergeben und ueber einen state handeln
 
 export default function AsynchronousSearchAdding(props) {
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState([]);
   const [searchInput, setSearchInput] = React.useState("");
   const [selectedTicker, setSelectedTicker] = React.useState("");
+  const [inputValue, setInputValue] = React.useState('');
   //Loading ist true, wenn in search etwas eingegeben wird
   //Sobald das Ergebnis vorhanden ist, wird lading false
   const [loading, setLoading] = React.useState(false);
@@ -82,10 +84,11 @@ export default function AsynchronousSearchAdding(props) {
     setInterestsInFocusArray((prev) => [...prev, selectedTicker]);
     setSelectedTicker("");
     setSearchInput("");
+    setInputValue("");
   }
 
-  function searchInputChanged(event) {
-    setSearchInput(event.target.value);
+  function searchInputChanged(newInputValue) {
+    setSearchInput(newInputValue);
     setLoading(true);
   }
 
@@ -100,7 +103,6 @@ export default function AsynchronousSearchAdding(props) {
     }
 
     (async () => {
-
       const searchURL = await "https://api.polygon.io/v3/reference/tickers?search=" + searchInput + "&active=true&sort=ticker&order=desc&limit=10&apiKey=";
       const response = await fetch(`api/searchRequestPolygonIo`, {
             body: JSON.stringify(
@@ -142,7 +144,18 @@ export default function AsynchronousSearchAdding(props) {
     <Search>
       <CostumeAutocomplete
         filterOptions={(options) => options}
-        inputValue={searchInput}
+        onInputChange={(event, newInputValue) => {
+          setInputValue(newInputValue)
+          if(event?.type == "change"){
+            searchInputChanged(newInputValue)
+          }
+        }}
+        inputValue={inputValue}
+        onChange={(event, newValue) => {
+          if(newValue?.ticker){
+            handlePaperClick(newValue.ticker);
+          }
+        }}
         id="asynchronous-demo"
         sx={{minWidth: 200 }}
         open={open}
@@ -155,6 +168,7 @@ export default function AsynchronousSearchAdding(props) {
         //isOptionEqualToValue vergleicht nochmal das, was Du eingegeben hast mit dem Ergebnis-Array (options)
         //isOptionEqualToValue={(option, value) => (option.name === value.title)}
         getOptionLabel={(option) => option.name}
+        noOptionsText="Suche nach Aktien, ETF´s,..."
         options={options}
         loading={loading}
         PaperComponent={CostumePaper}
@@ -179,7 +193,7 @@ export default function AsynchronousSearchAdding(props) {
                   justifyContent="center"
                   alignItems="flex-start"
                   value={option.ticker}
-                  onClick={() => handlePaperClick(option.ticker)}
+                  //onClick={() => handlePaperClick(option.ticker)}
                 >
                   <Typography variant="overline" value={option.ticker}>
                     Ticker: {option.ticker}
@@ -197,7 +211,7 @@ export default function AsynchronousSearchAdding(props) {
           sx={{pr: 0}}
             {...params}
             placeholder="Suche nach Titel"
-            onChange={(event) => searchInputChanged(event)}
+            //onChange={(event) => searchInputChanged(event)}
             ///label="search"
             variant="standard"
             InputProps={{
