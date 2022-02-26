@@ -26,7 +26,7 @@ export default function EmbellishedText(props) {
         return (
           <Typography
             variant="h6"
-            sx={{ color: theme.palette.mentionsColor.main }}
+            sx={{ color: theme.palette.mentionsColor.twitter }}
             component="span"
           >
             {word + " "}

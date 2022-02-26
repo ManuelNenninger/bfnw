@@ -1,7 +1,7 @@
 import * as React from "react";
 import ApiParametersSelectionTwitter from "./apiParametersSelectionTwitter";
 
-export default async function test(props) {
+export default async function test(url, props) {
   let dataResponseArray = [];
 
   //<----- Falls keine media Datei vorhanden ist aber der Tweet ein Link hat welcher wiederum Media zeigt
@@ -19,7 +19,7 @@ export default async function test(props) {
   //<-------- Fetch Funktion, um Daten zu bekommen -------->
   const InitialRequestFunction = async (event) => {
     const apiURL = await ApiParametersSelectionTwitter(props);
-    const response = await fetch(`api/dataRequestTwitter`, {
+    const response = await fetch(url, {
       body: JSON.stringify(
         apiURL.href
       ),

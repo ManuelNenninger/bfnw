@@ -28,7 +28,8 @@ const theme = createTheme({
       dark: '#292727',
     },
     mentionsColor: {
-      main: '#1DA1F2',
+      twitter: '#1DA1F2',
+      youTube: '#FF0000',
     },
     homePageButtonColor: {
       main: '#FFFFFF'

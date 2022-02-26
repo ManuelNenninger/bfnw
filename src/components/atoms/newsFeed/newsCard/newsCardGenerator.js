@@ -6,40 +6,24 @@ import NewsCardScelet from "./newsCardScelet";
 import CircularProgress from "@mui/material/CircularProgress";
 import DataRequestRequestNYT from "../newYorkTimeData/dataRequestNYT";
 import DataRequestRequestTwitter from "../TwitterData/dataRequestTwitter";
+import DataRequestRequestYouTube from "../youTubeData/dataRequestYouTube";
+import useSWR from "swr";
 
 
 export default function ContentGridGenerator(props) {
   const [loading, setLoading] = React.useState(true);
-  const [dataResponseArrayNYT, setdataResponseArrayNYT] = React.useState();
-  const [dataResponseArrayTwitter, setdataResponseArrayTwitter] = React.useState();
   const { selectedInterest } = props;
   const SLIDE_COUNT_NEWS_CARD = props.numberOfNewsCards;
   const slidesNews = Array.from(Array(SLIDE_COUNT_NEWS_CARD));
 
-  const InitialRequestFunction = async function() {
-    //Starte die Request an die API gleichzeitig, da sonst multiple await request viel Zeit beanspruchen
-    //Anschließend wartet Promise.allSettled auf die Daten.
-    //Destructuring die response von Promise.allSettled
-    //in status steht, ob das promise resolved oder rejected wurde (z.B weil die api-request nicht ging)
-    //Wenn ja, dann steht die response von der api in "value"
-    const resNYT_promise = DataRequestRequestNYT(props);
-    const resTwitter_promise = DataRequestRequestTwitter(props);
-    const [resNYT, resTwitter] = await Promise.allSettled([resNYT_promise, resTwitter_promise]);
+  const { data: dataNYT, error: errorNYT } = useSWR(["api/dataRequestNYT", props], DataRequestRequestNYT);
+  if (errorNYT) console.log("Error bei NYT API: " + errorNYT);
 
-    if (resNYT.status === "fulfilled") {
-      setdataResponseArrayNYT(resNYT.value);
-    }
-    if (resTwitter.status === "fulfilled") {
-      setdataResponseArrayTwitter(resTwitter.value);
-    }
-    setLoading(!true);
-  };
+  const { data: dataTwitter, error: errorTwitter } = useSWR(["api/dataRequestTwitter", props ], DataRequestRequestTwitter);
+  if (errorTwitter) console.log("Error bei Twitter API: " + errorTwitter);
 
-  //<------ Hier wird der initiale Request der Daten durchgeführt ------>
-  React.useEffect(() => {
-    setLoading(true);
-    InitialRequestFunction();
-  }, [selectedInterest]);
+  const { data: dataYouTube, error: errorYouTube } = useSWR(["api/dataRequestYouTube", props], DataRequestRequestYouTube);
+  if (errorYouTube) console.log("Error bei YouTube API: " + errorYouTube);
 
   //<------ Hier wird der Datenrequest durchgefuhrt, nachdem der Bottom erreicht wurde ------>
   // React.useEffect(() => {
@@ -66,19 +50,29 @@ export default function ContentGridGenerator(props) {
         breakpointCols={breakpointColumnsObj}
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column">
-          {
-            dataResponseArrayNYT.map((articleObject, index) => (
+          {dataNYT ?
+            (dataNYT.map((articleObject, index) => (
               <Grid key={index + "_NYT_Card"} item>
                 <NewsCardScelet articleObject={articleObject} cardIndex={index}/>
               </Grid>
-            ))
+            )))
+            : null
           }
-          {
-            dataResponseArrayTwitter.map((articleObject, index) => (
+          {dataTwitter ?
+            (dataTwitter.map((articleObject, index) => (
               <Grid key={index + "_Twitter_Card"} item>
                 <NewsCardScelet articleObject={articleObject} cardIndex={index}/>
               </Grid>
-            ))
+            )))
+            : null
+          }
+          {dataYouTube ?
+            (dataYouTube.map((articleObject, index) => (
+              <Grid key={index + "_YouTube_Card"} item>
+                <NewsCardScelet articleObject={articleObject} cardIndex={index}/>
+              </Grid>
+            )))
+            : null
           }
       </Masonry>
     </>
@@ -88,7 +82,7 @@ export default function ContentGridGenerator(props) {
   return (
     <>
       {
-        (loading && props.bottomOfNewsFeedCounter === 0) ? (
+        (!dataNYT && !dataTwitter && !dataYouTube) ? (
           <Grid
             container
             direction="row"

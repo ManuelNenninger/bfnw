@@ -1,13 +1,12 @@
 import * as React from "react";
 import ApiParametersSelectionNYT from "./apiParametersSelectionNYT";
 
-export default async function test(props) {
+export default async function test(url, props) {
   let dataResponseArray = [];
-
   //<-------- Fetch Funktion, um Daten zu bekommen -------->
   const InitialRequestFunction = async (event) => {
     const apiURL = await ApiParametersSelectionNYT(props);
-    const response = await fetch(`api/dataRequestNYT`, {
+    const response = await fetch(url, {
           body: JSON.stringify(
             apiURL
           ),

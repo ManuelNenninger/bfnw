@@ -10,6 +10,7 @@ import PinterestIcon from "@mui/icons-material/Pinterest";
 import TwitterIcon from '@mui/icons-material/Twitter';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import ArticleIcon from '@mui/icons-material/Article';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 import GetPublisherDateDifference from "../getPublisherDateDifference";
 import theme from "../../../../../styles/theme";
 import EmbellishedText from "../EmbellishedTextGenerator";
@@ -25,7 +26,8 @@ export default function MediaCard(props) {
 
   const iconSelection = {
     "The New York Times": (<ArticleIcon sx={{ backgroundColor: "#adb5bd", borderRadius: "50%", p: 0.5, }} />),
-    "Twitter": (<TwitterIcon sx={{ backgroundColor: theme.palette.mentionsColor.main, borderRadius: "50%", p: 0.5, }} />),
+    "Twitter": (<TwitterIcon sx={{ backgroundColor: theme.palette.mentionsColor.twitter, borderRadius: "50%", p: 0.5, }} />),
+    "YouTube": (<YouTubeIcon sx={{ backgroundColor: theme.palette.mentionsColor.youTube, color: '#FFFFFF', borderRadius: "50%", p: 0.5, }} />),
   };
 
   const placeHolderImageURL = {

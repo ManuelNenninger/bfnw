@@ -66,7 +66,7 @@ export default function BackToTop(props) {
     // console.log('Currently scrolled from top (px):' + window.pageYOffset)
     // console.log('Document height(px):' + document.body.offsetHeight)
     if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
-      setBottomOfNewsFeedCounter(prev => prev + 1)
+      //setBottomOfNewsFeedCounter(prev => prev + 1)
       console.log("You reached the bottom of the window.");
     }
   }
