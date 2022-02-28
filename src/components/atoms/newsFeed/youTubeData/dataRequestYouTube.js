@@ -41,7 +41,7 @@ export default async function test(url, props) {
         method: 'POST'
       });
       const res = await response.json();
-
+      console.log(res);
       res.items.map(function(dataObject, index) {
         const headline = dataObject.snippet.title;
         const entitiesForText = false;

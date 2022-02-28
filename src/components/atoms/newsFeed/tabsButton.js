@@ -37,7 +37,7 @@ export default function ScrollableTabsButtonAuto(props) {
         justifyContent="flex-start"
         alignItems="center"
       >
-        <Grid item xs="auto" sx={{ borderRight: 1, borderColor: theme.palette.borderColor.dark }} zeroMinWidth>
+        <Grid item xs={3} sx={{ borderRight: 1, borderColor: theme.palette.borderColor.dark }} zeroMinWidth>
           <Tabs
             textColor="primary"
             indicatorColor="primary"
@@ -54,7 +54,7 @@ export default function ScrollableTabsButtonAuto(props) {
             </Tooltip>
           </Tabs>
         </Grid>
-        <Grid item xs="auto" sx={{ borderRight: 1, borderColor: theme.palette.borderColor.dark }} zeroMinWidth>
+        <Grid item xs={6} sx={{ borderRight: 1, borderColor: theme.palette.borderColor.dark }} zeroMinWidth>
           <Tabs
             textColor="primary"
             indicatorColor="primary"
@@ -71,7 +71,7 @@ export default function ScrollableTabsButtonAuto(props) {
             <Tab icon={<HomeWorkIcon />} label="Börse generell" />
           </Tabs>
         </Grid>
-        <Grid item xs zeroMinWidth>
+        <Grid item xs={3} zeroMinWidth>
           <Tabs
             textColor="primary"
             indicatorColor="primary"

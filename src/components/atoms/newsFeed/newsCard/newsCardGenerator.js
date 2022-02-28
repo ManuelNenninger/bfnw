@@ -40,7 +40,7 @@ export default function ContentGridGenerator(props) {
     default: 4,
     1400: 3,
     1200: 2,
-    600: 2,
+    600: 1,
   };
 
   function Cards() {
