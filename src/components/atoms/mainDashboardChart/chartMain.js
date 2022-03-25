@@ -1,42 +1,53 @@
 import * as React from "react";
 import { useEffect } from "react";
 import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 import Chart from "chart.js/auto";
 import chartConfigFunction from "./mainChartConfig";
 import DataRequestPolygonIo from "./dataRequestPolygonIo";
 import { useAppContext } from "../../../appContext";
-
+import useSWR from "swr";
 
 export default function BoxSx(props) {
   let myChart;
-  let value = useAppContext();
+  let { searchContent } = useAppContext();
+  let { weekdaySelection } = props
+
+  const { data: dataPolygon, error: errorPolygon } = useSWR(["api/dataRequestPolygonIo", [weekdaySelection,searchContent]],
+      DataRequestPolygonIo, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: true
+      });
+    // if (dataPolygon) {
+    //   console.log("SWR des MainChart hat Daten da:");
+    //   console.log(dataPolygon);
+    // }
+    // if (errorPolygon) {
+    //   console.log("Error bei MainChart SWR");
+    //   console.log(errorPolygon);
+    // }
 
 
-  //<-------- ChartJs Funktion, um den Chart zu erstellen -------->
-  const InitialChartJsFunction = async (event) => {
-    //Hie wird die Data angefordert. Da auf die Daten gewartet werden muss, ist hier eine await funktion.
-    const { dataValueArray, dataKeyArray, metaData } = await DataRequestPolygonIo({weekdaySelection: props.weekdaySelection, searchContent: value.searchContent});
+  useEffect(() => {
 
-    //Hie wird die Config des Charts angefordert. Übergeben wird dabei die Werte der Response
+    //Wenn die Daten noch nicht da sind, beende useEffect ohne den Chart zu zerstören
+    if (!dataPolygon) {
+      // console.log("Es sind noch keine Daten vorhanden. useEffect returned nichts.");
+      return;
+    }
+    //Wenn Daten da sind, erstelle den Chart
+    // console.log("Jetzt wird ein neuer Chart gemacht!");
+    const { dataValueArray, dataKeyArray, metaData } = dataPolygon;
     let { chartConfig } = chartConfigFunction(
       dataValueArray,
       dataKeyArray,
       metaData,
-      props.weekdaySelection
+      weekdaySelection
     );
 
     const ctx = document.getElementById("myChart");
     myChart = new Chart(ctx, chartConfig, []);
-    // console.log(
-    //   "Hier ist der aktuell erstellte chart, da die Response da ist: " + myChart
-    // );
-  };
-
-  useEffect(() => {
-    //Hier wird die open-Values der Asset gespeichert
-
-    InitialChartJsFunction();
-    // console.log("Jetzt wird ein neuer Chart gemacht!");
     // console.log(
     //   "hier ist der Chart undefiniert, da auf die response gewartet wird:" +
     //     myChart
@@ -47,7 +58,7 @@ export default function BoxSx(props) {
       // console.log("Hier wird der aktuelle chart zerstört: " + myChart);
       myChart.destroy();
     };
-  }, [props.weekdaySelection, value.searchContent]);
+  }, [dataPolygon]);
 
   return (
     <Box
@@ -64,6 +75,11 @@ export default function BoxSx(props) {
         aria-label="Hello ARIA World"
         role="img"
       ></canvas>
+      {errorPolygon && !dataPolygon ? (
+          <Box sx={{ display: "flex" }}>
+            <CircularProgress />
+          </Box>
+        ) : null}
     </Box>
   );
 }

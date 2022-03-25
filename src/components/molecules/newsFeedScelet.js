@@ -99,12 +99,12 @@ useEffect(() => {
           />
         </Toolbar>
       </AppBar>
-      <Box id="mainNewsFeed" sx={{my: 4,mx: "auto", maxWidth: '1600px'}}  >
-        <NewsCardGenerator
-          bottomOfNewsFeedCounter={bottomOfNewsFeedCounter}
-          selectedInterest={selectedInterest}
-        />
-      </Box>
+        <Box id="mainNewsFeed" sx={{my: 4,mx: "auto", maxWidth: '1600px'}}  >
+          <NewsCardGenerator
+            bottomOfNewsFeedCounter={bottomOfNewsFeedCounter}
+            selectedInterest={selectedInterest}
+          />
+        </Box>
       <ScrollTop {...props}>
         <Fab sx={{backgroundColor: theme.palette.secondary.light}} size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />

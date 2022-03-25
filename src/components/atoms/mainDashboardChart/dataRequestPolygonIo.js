@@ -40,10 +40,12 @@ function companyNameRequest(ticker) {
 }
 let companyNameRequestCached = companyNameRequest();
 
-export default async function test({weekdaySelection, searchContent}) {
+export default async function test(url, ApiParameterData) {
   let arrayClosingValue = [];
   let arrayTimeStampValue = [];
   let metaData;
+  let [weekdaySelection,searchContent] = ApiParameterData;
+  //console.log("Neuer Request für ---> " + searchContent);
 
   //<-------- Fetch Funktion, um Daten zu bekommen -------->
   const InitialRequestFunction = async (event) => {

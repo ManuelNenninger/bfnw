@@ -1,7 +1,7 @@
 import * as React from "react";
 import ApiParametersSelection from "./apiParametersSelection";
 
-export default async function test(kategorie) {
+export default async function test(url, kategorie) {
 function createData(icon, assetName, closePrice, interest, tickerSymbol) {
   return { icon, assetName, closePrice, interest, tickerSymbol };
 }
@@ -43,14 +43,15 @@ let responseRows = []
         }
       );
     const res = await response.json();
-    
+
     responseRows = await Promise.all(res.tickers.map(async function(ticker, index){
       let companyName = await companyNameRequest(ticker)
       return createData("FacebookIcon", companyName, ticker.day.c.toFixed(3), ticker.todaysChangePerc.toFixed(3), ticker.ticker);
     }));
   };
 
-  await InitialRequestFunction();
+await InitialRequestFunction();
 
-  return responseRows;
+return responseRows;
+
 }
