@@ -11,21 +11,21 @@ export function AppWrapper({ children }) {
   const [snackCounter, setSnackCounter] = useState(0);
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  let timeleft = 10;
+  let timeleft = 60;
   useEffect(() => {
     console.log(snackCounter);
     if (snackCounter >= 5) {
       setOpenSnackbar(true);
     }
 
-    if (timeleft === 10 && snackCounter === 1) {
+    if (timeleft === 60 && snackCounter === 1) {
       const downloadTimer = setInterval(function () {
-        // console.log("Es sind noch " + timeleft + " Sekunden verbleibend");
+        console.log("Es sind noch " + timeleft + " Sekunden verbleibend");
         if (timeleft <= 0) {
           setSnackCounter(0);
           setOpenSnackbar(false);
-          timeleft = 10;
-          // console.log("Der Timer wurde zurück gestellt: " + timeleft);
+          timeleft = 60;
+          console.log("Der Timer wurde zurück gestellt: " + timeleft);
           clearInterval(downloadTimer);
         }
         timeleft -= 1;
@@ -43,6 +43,7 @@ export function AppWrapper({ children }) {
         snackCounter: snackCounter,
         setSnackCounter: setSnackCounter,
         openSnackbar: openSnackbar,
+        timeleft: timeleft,
       }}
     >
       {children}
