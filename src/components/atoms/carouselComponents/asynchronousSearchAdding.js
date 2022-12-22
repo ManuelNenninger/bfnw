@@ -5,20 +5,21 @@ import CircularProgress from "@mui/material/CircularProgress";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import InputAdornment from "@mui/material/InputAdornment";
-import Paper from '@mui/material/Paper';
+import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
+import { useAppContext } from "../../../appContext";
 
 const LightTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
     backgroundColor: theme.palette.primary.light,
-    color: 'rgba(0, 0, 0, 0.87)',
+    color: "rgba(0, 0, 0, 0.87)",
     boxShadow: theme.shadows[1],
     fontSize: 11,
   },
@@ -29,16 +30,12 @@ const CostumeAutocomplete = styled(Autocomplete)(({ theme }) => ({
     //paddingRight: "0px!important"
   },
   "& .MuiAutocomplete-inputRoot": {
-    paddingRight: "0px!important"
-  }
+    paddingRight: "0px!important",
+  },
 }));
 
 const CostumePaper = ({ children, ...other }) => (
-  <Paper
-    {...other}
-    sx={{ border: 1, borderColor: "#f4f4f4" }}
-
-  >
+  <Paper {...other} sx={{ border: 1, borderColor: "#f4f4f4" }}>
     {children}
   </Paper>
 );
@@ -48,7 +45,7 @@ const Search = styled("div")(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25)
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
 }));
 
@@ -60,24 +57,25 @@ export default function AsynchronousSearchAdding(props) {
   const [options, setOptions] = React.useState([]);
   const [searchInput, setSearchInput] = React.useState("");
   const [selectedTicker, setSelectedTicker] = React.useState("");
-  const [inputValue, setInputValue] = React.useState('');
+  const [inputValue, setInputValue] = React.useState("");
   //Loading ist true, wenn in search etwas eingegeben wird
   //Sobald das Ergebnis vorhanden ist, wird lading false
   const [loading, setLoading] = React.useState(false);
   const { setInterestsInFocusArray } = props;
+  let value = useAppContext();
 
   //<--------- State fuer die Search eingabe --------->
   function handlePaperClick(event) {
     //Wenn kein Suchergebis vorliegt aber dennoch auf die Auswahl geklickt wird, wird nichts durchgefuehrt
-    if(event === "-"){
+    if (event === "-") {
       return;
     }
     setSelectedTicker(event);
   }
 
-  function handleAddCardComponentClick(event){
+  function handleAddCardComponentClick(event) {
     //Wenn kein Suchergebis vorliegt aber dennoch auf die Auswahl geklickt wird, wird nichts durchgefuehrt
-    if(selectedTicker === ""){
+    if (selectedTicker === "") {
       return;
     }
     //console.log("Der ausgewählte Ticker ist: " + selectedTicker);
@@ -103,22 +101,25 @@ export default function AsynchronousSearchAdding(props) {
     }
 
     (async () => {
-      const searchURL = await "https://api.polygon.io/v3/reference/tickers?search=" + searchInput + "&active=true&sort=ticker&order=desc&limit=10&apiKey=";
+      value.setSnackCounter((prev) => {
+        return prev + 1;
+      });
+      const searchURL =
+        (await "https://api.polygon.io/v3/reference/tickers?search=") +
+        searchInput +
+        "&active=true&sort=ticker&order=desc&limit=10&apiKey=";
       const response = await fetch(`api/searchRequestPolygonIo`, {
-            body: JSON.stringify(
-              searchURL
-            ),
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            method: 'POST'
-          }
-        );
+        body: JSON.stringify(searchURL),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
       const res = await response.json();
 
       if (active) {
-        if(res.results == null){
-          setOptions([{name: "No Results on NASDAQ", ticker: "-"}]);
+        if (res.results == null) {
+          setOptions([{ name: "No Results on NASDAQ", ticker: "-" }]);
           setLoading(false);
         } else {
           setOptions([...res.results]);
@@ -145,19 +146,19 @@ export default function AsynchronousSearchAdding(props) {
       <CostumeAutocomplete
         filterOptions={(options) => options}
         onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue)
-          if(event?.type == "change"){
-            searchInputChanged(newInputValue)
+          setInputValue(newInputValue);
+          if (event?.type == "change") {
+            searchInputChanged(newInputValue);
           }
         }}
         inputValue={inputValue}
         onChange={(event, newValue) => {
-          if(newValue?.ticker){
+          if (newValue?.ticker) {
             handlePaperClick(newValue.ticker);
           }
         }}
         id="asynchronous-demo"
-        sx={{minWidth: 200 }}
+        sx={{ minWidth: 200 }}
         open={open}
         onOpen={() => {
           setOpen(true);
@@ -208,7 +209,7 @@ export default function AsynchronousSearchAdding(props) {
         }}
         renderInput={(params) => (
           <TextField
-          sx={{pr: 0}}
+            sx={{ pr: 0 }}
             {...params}
             placeholder="Suche nach Titel"
             //onChange={(event) => searchInputChanged(event)}
@@ -226,10 +227,15 @@ export default function AsynchronousSearchAdding(props) {
                 <React.Fragment>
                   {loading ? (
                     <CircularProgress color="inherit" size={20} />
-                  ) : <InputAdornment position="end">
+                  ) : (
+                    <InputAdornment position="end">
                       <LightTooltip title="Über den + Button kannst Du den ausgewählten Titel zu deinen Pins hinzufügen">
-                        <IconButton color="primary" aria-label="add to Card Component" onClick={() => handleAddCardComponentClick(event)}>
-                          <AddCircleOutlineRoundedIcon/>
+                        <IconButton
+                          color="primary"
+                          aria-label="add to Card Component"
+                          onClick={() => handleAddCardComponentClick(event)}
+                        >
+                          <AddCircleOutlineRoundedIcon />
                           {/*<Typography
                             sx={{pl: 0.5}}
                             variant="button"
@@ -239,10 +245,11 @@ export default function AsynchronousSearchAdding(props) {
                             add
                           </Typography>*/}
                         </IconButton>
-                    </LightTooltip>
-                  </InputAdornment>}
+                      </LightTooltip>
+                    </InputAdornment>
+                  )}
                 </React.Fragment>
-              )
+              ),
             }}
           />
         )}

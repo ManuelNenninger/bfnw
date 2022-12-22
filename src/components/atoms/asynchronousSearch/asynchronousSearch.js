@@ -5,25 +5,20 @@ import CircularProgress from "@mui/material/CircularProgress";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import InputAdornment from "@mui/material/InputAdornment";
-import Paper from '@mui/material/Paper';
+import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { useAppContext } from "../../../appContext";
 
-
 const CostumeAutocomplete = styled(Autocomplete)(({ theme }) => ({
   "& .MuiInputBase-root": {
-    padding: "4px"
-  }
+    padding: "4px",
+  },
 }));
 
 const CostumePaper = ({ children, ...other }) => (
-  <Paper
-    {...other}
-    sx={{ border: 1, borderColor: "#f4f4f4" }}
-
-  >
+  <Paper {...other} sx={{ border: 1, borderColor: "#f4f4f4" }}>
     {children}
   </Paper>
 );
@@ -33,18 +28,16 @@ const Search = styled("div")(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25)
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
-    width: "auto"
-  }
+    width: "auto",
+  },
 }));
-
-
 
 export default function Asynchronous(props) {
   const [open, setOpen] = React.useState(false);
@@ -58,11 +51,14 @@ export default function Asynchronous(props) {
   //<--------- State fuer die Search eingabe --------->
   function handlePaperClick(event) {
     //Wenn kein Suchergebis vorliegt aber dennoch auf die Auswahl geklickt wird, wird nichts durchgefuehrt
-    if(event === "-"){
+    if (event === "-") {
       return;
     }
     value.setSearchContent(event);
-    setSearchInput("")
+    value.setSnackCounter((prev) => {
+      return prev + 1;
+    });
+    setSearchInput("");
   }
 
   function searchInputChanged(event) {
@@ -81,23 +77,25 @@ export default function Asynchronous(props) {
     }
 
     (async () => {
-
-      const searchURL = await "https://api.polygon.io/v3/reference/tickers?search=" + searchInput + "&active=true&sort=ticker&order=desc&limit=10&apiKey=";
+      value.setSnackCounter((prev) => {
+        return prev + 1;
+      });
+      const searchURL =
+        (await "https://api.polygon.io/v3/reference/tickers?search=") +
+        searchInput +
+        "&active=true&sort=ticker&order=desc&limit=10&apiKey=";
       const response = await fetch(`api/searchRequestPolygonIo`, {
-            body: JSON.stringify(
-              searchURL
-            ),
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            method: 'POST'
-          }
-        );
+        body: JSON.stringify(searchURL),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
       const res = await response.json();
 
       if (active) {
-        if(res.results == null){
-          setOptions([{name: "No Results on NASDAQ", ticker: "-"}]);
+        if (res.results == null) {
+          setOptions([{ name: "No Results on NASDAQ", ticker: "-" }]);
           setLoading(false);
         } else {
           setOptions([...res.results]);
@@ -194,7 +192,7 @@ export default function Asynchronous(props) {
                   ) : null}
                   {params.InputProps.endAdornment}
                 </React.Fragment>
-              )
+              ),
             }}
           />
         )}
